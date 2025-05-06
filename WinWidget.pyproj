@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app\core\config.py" />
+    <Compile Include="app\service.py" />
     <Compile Include="app\main.py" />
     <Compile Include="app\scripts\project_for_deepseek.py" />
     <Compile Include="app\service\drawing_manager.py" />
