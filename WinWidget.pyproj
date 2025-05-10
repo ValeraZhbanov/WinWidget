@@ -26,6 +26,9 @@
     <Compile Include="app\main.py" />
     <Compile Include="app\scripts\project_for_deepseek.py" />
     <Compile Include="app\service\drawing_manager.py" />
+    <Compile Include="app\service\ocr_service.py" />
+    <Compile Include="app\service\timer_service.py" />
+    <Compile Include="app\service\telegram_service.py" />
     <Compile Include="app\service\overlay_manager.py" />
     <Compile Include="app\service\__init__.py" />
     <Compile Include="app\widget\utils\helpers.py" />
@@ -33,6 +36,8 @@
     <Compile Include="app\widget\utils\__init__.py" />
     <Compile Include="app\widget\views\buttons\base_button.py" />
     <Compile Include="app\widget\views\buttons\graphic_buttons.py" />
+    <Compile Include="app\widget\views\buttons\tool_buttons.py" />
+    <Compile Include="app\widget\views\buttons\time_buttons.py" />
     <Compile Include="app\widget\views\buttons\start_buttons.py" />
     <Compile Include="app\widget\views\buttons\text_buttons.py" />
     <Compile Include="app\widget\views\buttons\__init__.py" />

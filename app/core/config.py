@@ -25,6 +25,12 @@ class Configs(BaseSettings):
 
     DRAW_INTERVAL_UPDATE: int = 100
 
+    TELEGRAM_BOT_TOKEN: str | None = os.getenv("WINWIDGET_TELEGRAM_BOT_NOTEBOOK_TOKEN")
+    TELEGRAM_CHAT_ID: str | None = os.getenv("TELEGRAM_ID")
+
+    NOTIFICATION_SOUND_PATH: str = os.path.join(RESOURCES_DIR, 'mixkit-sci-fi-click-900.wav')
+
+
 
     QTWIDGET_STYLES: str = """
 QFrame {

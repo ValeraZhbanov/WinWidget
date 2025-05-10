@@ -1,7 +1,7 @@
 ﻿import logging
 import ctypes
 from ctypes import wintypes
-from PyQt6.QtCore import QObject, QRect, QPoint, Qt, QEvent
+from PyQt6.QtCore import QObject, QRect, QPoint, Qt, QEvent, pyqtSignal
 from PyQt6.QtGui import QColor, QMouseEvent, QPainter, QPen, QBrush, QPolygon
 from PyQt6.QtWidgets import QApplication, QWidget
 from typing import Set
@@ -175,6 +175,8 @@ class DrawingOverlay(QWidget):
 class DrawingManager(QObject):
     _instance = None
 
+    finish_figure_signal = pyqtSignal(object)
+
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
@@ -201,6 +203,14 @@ class DrawingManager(QObject):
         self.overlay.show()
         logging.debug(f"New figure mode: {FigureType.__name__}")
 
+    def remove_figure(self, figure):
+        if figure in self.figures:
+            self.figures.remove(figure)
+            self.overlay.update()
+            logging.debug(f"Figure removed: {figure}")
+            return True
+        return False
+
     def start_new_figure(self, pos):
         if self.current_figure_type:
             self.current_figure_start = pos
@@ -215,6 +225,7 @@ class DrawingManager(QObject):
     def finish_figure(self):
         if self.current_figure:
             self.figures.add(self.current_figure)
+            self.finish_figure_signal.emit(self.current_figure)
             logging.debug(f"Finish new figure")
         self.reset_state()
         self.overlay.update()

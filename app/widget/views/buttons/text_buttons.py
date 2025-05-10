@@ -1,7 +1,9 @@
 ﻿
-from PyQt6.QtWidgets import QPushButton, QHBoxLayout
+import logging
+from PyQt6.QtWidgets import QPushButton, QHBoxLayout, QInputDialog
 from PyQt6.QtGui import QGuiApplication, QClipboard, QIcon
 from app.widget.views.buttons.base_button import BaseButton
+from app.service.telegram_service import TelegramService
 from app.core.config import configs
 
 
@@ -40,3 +42,16 @@ class LayoutSwitchButton(BaseButton):
             clipboard.setText(translated)
         except:
             logging.error(f"Ошибка преобразования текста в браузере: {e}")
+
+
+class TelegramButton(BaseButton):
+    def __init__(self):
+        super().__init__("icons8-telegram-50.png", "Отправить заметку в Telegram")
+
+    def on_click(self):
+        text, ok = QInputDialog.getText(self.window(), "Telegram Note", "Введите заметку:")
+        if ok and text:
+            if TelegramService().send_message(text):
+                logging.info("Message sent to Telegram")
+            else:
+                logging.warning("Failed to send message to Telegram")
