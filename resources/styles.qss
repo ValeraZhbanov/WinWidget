@@ -1,0 +1,102 @@
+﻿
+
+
+[accessibleName=OverlayWidget] {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #000000, stop:1 #2a5c2a);
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 0;
+    margin: 0;
+}
+
+[accessibleName=MainFrame] {
+    background: #2b2b2b;
+    border: 1px solid #444;
+    border-radius: 0;
+    padding: 0;
+}
+
+[accessibleName=MainFrame] QGroupBox {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+[accessibleName=MainFrame] QPushButton {
+    background: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 4px;
+    min-width: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+[accessibleName=MainFrame] QPushButton:hover {
+    background: #4a4a4a;
+}
+
+[accessibleName=MainFrame] QPushButton:pressed {
+    background: #2a2a2a;
+}
+
+[accessibleName=MainFrame] [accessibleName=DateTimeView] {
+    border: none;
+    color: #ffffff;
+    font-family: "Segoe UI", Arial;
+    margin: 0;
+    padding: 0;
+}
+
+[accessibleName=MainFrame] [accessibleName=DateTimeView] [accessibleName=TimeLabel] {
+    font-size: 30pt;
+}
+
+[accessibleName=MainFrame] [accessibleName=DateTimeView] [accessibleName=DateLabel] {
+    font-size: 20pt;
+    font-family: "Segoe UI", Arial;
+}
+
+
+
+
+QToolTip {
+    background-color: #3a3a3a;
+    color: #f0f0f0;
+    border: 1px solid #4a4a4a;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: "Segoe UI", Arial;
+    font-size: 11pt;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    opacity: 240;
+}
+
+
+QDialog {
+    background: #3a3a3a;
+    border: 1px solid #555;
+}
+
+QDialog QLabel {
+    color: #ffffff;
+    font-size: 10pt;
+    font-family: "Segoe UI", Arial;
+}
+
+QDialog QLineEdit {
+    background: #4a4a4a;
+    color: #ffffff;
+    border: 1px solid #555;
+    padding: 5px;
+}
+
+QDialog QPushButton {
+    min-width: 80px;
+    max-width: none;
+    min-height: 25px;
+    max-height: none;
+    padding: 5px 10px;
+}

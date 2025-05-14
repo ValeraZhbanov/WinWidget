@@ -1,14 +1,30 @@
 ﻿
 import logging
-from PyQt6.QtWidgets import QLabel
-from PyQt6.QtCore import QTimer, QDateTime
+from PyQt6.QtWidgets import QWidget, QLabel, QGridLayout
+from PyQt6.QtCore import Qt, QTimer, QDateTime
 from PyQt6.QtCore import QLocale
 from app.core.config import configs
 
-class DateTimeView(QLabel):
+class DateTimeView(QWidget):
     def __init__(self):
         super().__init__()
+        self.setAccessibleName("DateTimeView")
+        
         self.locale = QLocale()
+        self.layout = QGridLayout()    
+        self.layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(self.layout)
+        
+        self.time_label = QLabel()
+        self.time_label.setAccessibleName("TimeLabel")
+        self.layout.addWidget(self.time_label, 0, 0)
+
+        self.date_label = QLabel()
+        self.date_label.setAccessibleName("DateLabel")
+        self.layout.addWidget(self.date_label, 1, 0)
+        
         self.update_time()
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_time)
@@ -16,8 +32,12 @@ class DateTimeView(QLabel):
 
     def update_time(self):
         current_time = QDateTime.currentDateTime()
-        time_str = self.locale.toString(current_time, configs.DATETIME_FORMAT)
-        logging.debug(f"Time event {time_str}")
+
+        fulltime_str = self.locale.toString(current_time, configs.DATETIME_FORMAT)
+        time_str = self.locale.toString(current_time, configs.TIME_FORMAT)
+        date_str = self.locale.toString(current_time, configs.DATEFULL_FORMAT)
+
+        logging.debug(f"Time event {fulltime_str}")
         
-        self.setText(time_str)        
-        self.setToolTip(self.locale.toString(current_time, configs.DATETIMEFULL_FORMAT))
+        self.time_label.setText(time_str)                
+        self.date_label.setText(date_str)        

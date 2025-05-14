@@ -31,8 +31,9 @@
     <Compile Include="app\service\telegram_service.py" />
     <Compile Include="app\service\overlay_manager.py" />
     <Compile Include="app\service\__init__.py" />
+    <Compile Include="app\widget\utils\qelements.py" />
     <Compile Include="app\widget\utils\helpers.py" />
-    <Compile Include="app\widget\utils\styles.py" />
+    <Compile Include="resources\styles.qss" />
     <Compile Include="app\widget\utils\__init__.py" />
     <Compile Include="app\widget\views\buttons\base_button.py" />
     <Compile Include="app\widget\views\buttons\graphic_buttons.py" />

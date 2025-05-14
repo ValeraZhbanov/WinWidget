@@ -1,6 +1,9 @@
 ﻿
 import os
+import sys
 from pathlib import Path
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QGuiApplication
 from app.core.config import configs
 
 
@@ -11,21 +14,30 @@ def collect_py_files(base_dir="."):
             continue
         
         for file in files:
-            if file.endswith(".py"):
+            if file.endswith(".py") or file.endswith(".pyw") or file.endswith(".qss"):
                 full_path = Path(root) / file
                 py_files.append(full_path)
     return py_files
 
-def print_file_contents(file_paths):
+def file_contents(file_paths):
+    texts = []
+
     for path in file_paths:
         relative_path = path.relative_to(Path.cwd())
-        print(f"\n{relative_path}\n")
+        texts.append(f"\n{relative_path}\n")
         
         with open(path, "r", encoding="utf-8") as f:
-            print(f.read())
+            texts.append(f.read())
+
+    return '\n'.join(texts)
 
 
 if __name__ == "__main__":
     project_root = configs.PROJECT_ROOT
     py_files = collect_py_files(project_root)
-    print_file_contents(py_files)
+    text = file_contents(py_files)
+
+    print(text)
+    app = QApplication(sys.argv)
+    clipboard = QGuiApplication.clipboard()
+    clipboard.setText(text)

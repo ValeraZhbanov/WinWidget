@@ -32,6 +32,7 @@ class OverlayManager(QObject):
         self.widget_rect = QRect(*configs.WIDGET_RECT)
         
         self.overlay = QWidget()
+        self.overlay.setAccessibleName("OverlayWidget")
 
         self.overlay.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
@@ -41,7 +42,6 @@ class OverlayManager(QObject):
         )
 
         self.overlay.setGeometry(self.target_rect)
-        self.overlay.setStyleSheet(configs.QTOVERLAY_STYLES)
         self.overlay.show()
 
     def start(self):

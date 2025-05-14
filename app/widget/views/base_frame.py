@@ -3,17 +3,18 @@ from PyQt6.QtWidgets import QFrame, QPushButton, QVBoxLayout, QHBoxLayout, QGrap
 from PyQt6.QtCore import Qt, QPropertyAnimation, QRect
 from app.widget.views.datetime_view import DateTimeView
 from app.widget.views.buttons import ButtonsGroup
+from app.widget.utils.qelements import QSeparator
 from app.core.config import configs
 
 class BaseFrame(QFrame):
     def __init__(self):
         super().__init__()
+        self.setAccessibleName('MainFrame')
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.WindowStaysOnTopHint |
             Qt.WindowType.Tool
         )
-        self.setStyleSheet(configs.QTWIDGET_STYLES)
         self.setGeometry(QRect(*configs.WIDGET_RECT))
         self.setFixedSize(*configs.WIDGET_RECT[2:])
 
@@ -35,9 +36,13 @@ class BaseFrame(QFrame):
 
         self.main_layout = QVBoxLayout()
         self.main_layout.setContentsMargins(15, 15, 15, 15)
-        
+        self.main_layout.setSpacing(10)
+
         self.datetime_view = DateTimeView()
         self.main_layout.addWidget(self.datetime_view)
+
+        self.separator = QSeparator()
+        self.main_layout.addWidget(self.separator)
         
         self.buttons_group = ButtonsGroup()
         self.main_layout.addWidget(self.buttons_group)

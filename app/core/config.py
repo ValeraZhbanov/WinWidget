@@ -16,7 +16,10 @@ class Configs(BaseSettings):
     RESOURCES_DIR: str = os.path.join(PROJECT_ROOT, 'resources')
 
     DATETIME_FORMAT: str = "dd.MM.yyyy HH:mm:ss"
-    DATETIMEFULL_FORMAT: str = "d MMMM yyyy года HH:mm:ss"
+    TIME_FORMAT: str = "HH:mm:ss"
+    DATE_FORMAT: str = "dd.MM.yyyy"
+    DATEFULL_FORMAT: str = "dddd, dd.MM.yyyy (MMMM)"
+
     TIME_INTERVAL_UPDATE: int = 1000
 
     WIDGET_RECT: tuple = (3, 200, 500, 300)
@@ -29,72 +32,7 @@ class Configs(BaseSettings):
     TELEGRAM_CHAT_ID: str | None = os.getenv("TELEGRAM_ID")
 
     NOTIFICATION_SOUND_PATH: str = os.path.join(RESOURCES_DIR, 'mixkit-sci-fi-click-900.wav')
-
-
-
-    QTWIDGET_STYLES: str = """
-QFrame {
-    background: #2b2b2b;
-    border: 1px solid #444;
-    border-radius: 0;
-    padding: 0;
-}
-
-QToolTip {
-    background-color: #3a3a3a;
-    color: #f0f0f0;
-    border: 1px solid #4a4a4a;
-    border-radius: 4px;
-    padding: 8px;
-    font-family: "Segoe UI", Arial;
-    font-size: 11pt;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-    opacity: 240;
-}
-
-QLabel {
-    border: none;
-    color: #ffffff;
-    font-size: 30pt;
-    font-weight: 500;
-    font-family: "Segoe UI", Arial;
-    margin: 0;
-    padding: 0;
-}
-
-QGroupBox {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-QPushButton {
-    background: #3a3a3a;
-    border: 1px solid #555;
-    border-radius: 4px;
-    min-width: 25px;
-    max-width: 25px;
-    min-height: 25px;
-    max-height: 25px;
-    padding: 0;
-    margin: 0;
-}
-
-QPushButton:hover {
-    background: #4a4a4a;
-}
-
-QPushButton:pressed {
-    background: #2a2a2a;
-}
-"""
-    QTOVERLAY_STYLES: str = """
-background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #000000, stop:1 #2a5c2a);
-border: none;
-border-radius: 0 5px 5px 0;
-padding: 0;
-margin: 0;
-"""
+    STYLES_PATH: str = os.path.join(RESOURCES_DIR, 'styles.qss')
 
     class Config:
         case_sensitive: bool = True

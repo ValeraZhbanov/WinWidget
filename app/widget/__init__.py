@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QApplication
 from app.service.drawing_manager import DrawingManager
 from app.service.overlay_manager import OverlayManager
 from app.widget.views.base_frame import BaseFrame
+from app.core.config import configs
 
 
 class WinWidget:
@@ -22,6 +23,8 @@ class WinWidget:
         self.__initialized = True
 
         self.app = QApplication(sys.argv)
+        with open(configs.STYLES_PATH, "r", encoding="utf-8") as f:
+            self.app.setStyleSheet(f.read())
         self.is_visible = False
 
         self.drawing_manager = DrawingManager()
@@ -32,9 +35,6 @@ class WinWidget:
 
         self.frame = BaseFrame()
         self.frame.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
-
-    def get_main_window():
-        return self.frame
 
     def toggle_widget(self, is_visible):
 
