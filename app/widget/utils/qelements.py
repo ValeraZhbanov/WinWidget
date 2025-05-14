@@ -7,7 +7,6 @@ class QSeparator(QFrame):
         super().__init__()
         self.setFrameShape(QFrame.Shape.HLine)
         self.setFrameShadow(QFrame.Shadow.Sunken)
-        self.setStyleSheet("background-color: #555;")
         self.setFixedHeight(1)
 
 
@@ -19,7 +18,7 @@ class QLinesInputBox(QDialog):
             Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.Dialog
         )
-        self.setMinimumSize(450, 350)
+        self.setGeometry(parent.geometry())
         
         parent.installEventFilter(self)
         

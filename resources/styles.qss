@@ -1,8 +1,23 @@
 ﻿
+QSeparator {
+    background: palette(light);
+}
 
+QPushButton {
+    background: palette(mid);
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background: palette(light);
+}
+
+QPushButton:pressed {
+    background: palette(mid);
+}
 
 #OverlayWidget {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #000000, stop:1 #2a5c2a);
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 palette(dark), stop:1 palette(highlight));
     border: none;
     border-radius: 0 5px 5px 0;
     padding: 0;
@@ -10,8 +25,8 @@
 }
 
 #MainFrame {
-    background: #2b2b2b;
-    border: 1px solid #444;
+    background: palette(dark);
+    border: 1px solid palette(mid);
     border-radius: 0;
     padding: 0;
 }
@@ -23,9 +38,6 @@
 }
 
 #MainFrame QPushButton {
-    background: #3a3a3a;
-    border: 1px solid #555;
-    border-radius: 4px;
     min-width: 25px;
     max-width: 25px;
     min-height: 25px;
@@ -34,18 +46,9 @@
     margin: 0;
 }
 
-#MainFrame QPushButton:hover {
-    background: #4a4a4a;
-}
-
-#MainFrame QPushButton:pressed {
-    background: #2a2a2a;
-}
 
 #MainFrame #DateTimeView {
     border: none;
-    color: #ffffff;
-    font-family: "Segoe UI", Arial;
     margin: 0;
     padding: 0;
 }
@@ -56,40 +59,25 @@
 
 #MainFrame #DateTimeView #DateLabel {
     font-size: 20pt;
-    font-family: "Segoe UI", Arial;
 }
 
-
-
-
 QToolTip {
-    background-color: #3a3a3a;
-    color: #f0f0f0;
-    border: 1px solid #4a4a4a;
     border-radius: 4px;
     padding: 8px;
-    font-family: "Segoe UI", Arial;
     font-size: 11pt;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     opacity: 240;
 }
 
 
-
-
-
 QLinesInputBox {
-    background: #3a3a3a;
-    border: 1px solid #555;
+    background: palette(dark);
 }
 
 QLinesInputBox QTextEdit {
-    background: #4a4a4a;
-    color: #ffffff;
-    border: 1px solid #555;
+    border: none;
     padding: 10px;
     font-size: 12pt;
-    font-family: "Segoe UI", Arial;
 }
 
 QLinesInputBox QPushButton#okButton, QLinesInputBox QPushButton#cancelButton {
@@ -97,20 +85,8 @@ QLinesInputBox QPushButton#okButton, QLinesInputBox QPushButton#cancelButton {
     min-height: 30px;
     font-size: 12pt;
     padding: 5px 15px;
-    background: #4a4a4a;
-    color: #ffffff;
-    border: 1px solid #555;
-    border-radius: 4px;
+    margin: 3px 0px;
 }
-
-QLinesInputBox QPushButton#okButton:hover, QLinesInputBox QPushButton#cancelButton:hover {
-    background: #5a5a5a;
-}
-
-QLinesInputBox QPushButton#okButton:pressed, QLinesInputBox QPushButton#cancelButton:pressed {
-    background: #3a3a3a;
-}
-
 
 
 
