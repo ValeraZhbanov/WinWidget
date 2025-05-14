@@ -1,8 +1,9 @@
 ﻿
 import logging
-from PyQt6.QtWidgets import QPushButton, QHBoxLayout, QInputDialog
-from PyQt6.QtGui import QGuiApplication, QClipboard, QIcon
+from PyQt6.QtWidgets import QDialog
+from PyQt6.QtGui import QGuiApplication
 from app.widget.views.buttons.base_button import BaseButton
+from app.widget.utils.qelements import QLinesInputBox
 from app.service.telegram_service import TelegramService
 from app.core.config import configs
 
@@ -49,9 +50,12 @@ class TelegramButton(BaseButton):
         super().__init__("icons8-telegram-50.png", "Отправить заметку в Telegram")
 
     def on_click(self):
-        text, ok = QInputDialog.getText(self.window(), "Telegram Note", "Введите заметку:")
-        if ok and text:
-            if TelegramService().send_message(text):
-                logging.info("Message sent to Telegram")
-            else:
-                logging.warning("Failed to send message to Telegram")
+        dialog = QLinesInputBox(self.window())
+        
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            text = dialog.toPlainText()
+            if text:
+                if TelegramService().send_message(text):
+                    logging.info("Message sent to Telegram")
+                else:
+                    logging.warning("Failed to send message to Telegram")

@@ -9,7 +9,7 @@ from app.core.config import configs
 class BaseFrame(QFrame):
     def __init__(self):
         super().__init__()
-        self.setAccessibleName('MainFrame')
+        self.setObjectName('MainFrame')
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.WindowStaysOnTopHint |

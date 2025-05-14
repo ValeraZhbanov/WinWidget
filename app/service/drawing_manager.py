@@ -21,7 +21,7 @@ class MSLLHOOKSTRUCT(ctypes.Structure):
 
 class Figure:
     def __init__(self):
-        self.pen_color = QColor(255, 0, 0)  # Красный цвет по умолчанию
+        self.pen_color = QColor(255, 0, 0)
         self.pen_width = 2
         self.style_args = {}
 
@@ -98,7 +98,6 @@ class DrawingOverlay(QWidget):
         self.hook_id = None
         self.is_drawing = False
         
-        # Настройки окна
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.WindowStaysOnTopHint |
@@ -137,23 +136,14 @@ class DrawingOverlay(QWidget):
         CMPFUNC = ctypes.CFUNCTYPE(ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.POINTER(ctypes.c_void_p))
         self.hook_callback = CMPFUNC(hook_callback)
         self.hook_id = user32.SetWindowsHookExA(14, self.hook_callback, None, 0)
+        logging.debug(f"Mouse hook install")
 
     def remove_hook(self):
         if self.hook_id:
             user32.UnhookWindowsHookEx(self.hook_id)
             self.hook_id = None
+            logging.debug(f"Mouse hook drop")
 
-    def show(self):
-        self.install_hook()
-        return super().show()
-
-    def hide(self):
-        self.remove_hook()
-
-        if 0 < len(self.drawing_manager.figures):
-            return
-
-        return super().hide()
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -191,7 +181,7 @@ class DrawingManager(QObject):
         
         self.figures: Set[Figure] = set()
         self.overlay = DrawingOverlay(self)
-        self.overlay.hide()
+        self.overlay.show()
         
         self.current_figure_start = None
         self.current_figure_type = None
@@ -200,7 +190,7 @@ class DrawingManager(QObject):
     def new_figure(self, FigureType):
         self.reset_state()
         self.current_figure_type = FigureType
-        self.overlay.show()
+        self.overlay.install_hook()
         logging.debug(f"New figure mode: {FigureType.__name__}")
 
     def remove_figure(self, figure):
@@ -220,7 +210,6 @@ class DrawingManager(QObject):
         if self.current_figure_start and self.current_figure_type:
             self.current_figure = self.current_figure_type(self.current_figure_start, pos)
             self.overlay.update()
-            logging.debug(f"Temp new figure at {pos}")
 
     def finish_figure(self):
         if self.current_figure:
@@ -234,15 +223,14 @@ class DrawingManager(QObject):
         self.figures.clear()
         self.reset_state()
         self.overlay.update()
-        logging.debug(f"Finish new figure")
+        logging.debug("All figures cleared")
 
     def reset_state(self):
         self.current_figure = None
         self.current_figure_start = None
         self.current_figure_type = None
         self.overlay.remove_hook()
-        self.overlay.hide()
-        logging.debug(f"Reset new figure")
+        logging.debug("Drawing state reset")
 
 
 

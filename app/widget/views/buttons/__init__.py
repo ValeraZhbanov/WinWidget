@@ -5,7 +5,6 @@ from app.widget.views.buttons.text_buttons import LayoutSwitchButton, TelegramBu
 from app.widget.views.buttons.graphic_buttons import RectangleButton, ArrowButton, CleanButton
 from app.widget.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton
 from app.widget.views.buttons.time_buttons import TimerButton
-from app.widget.views.buttons.tool_buttons import OCRButton
 
 class ButtonsGroup(QGroupBox):
     def __init__(self):
@@ -26,9 +25,8 @@ class ButtonsGroup(QGroupBox):
         layout.addWidget(CmdAdminButton(), 2, 2)
 
         layout.addWidget(TimerButton(), 3, 0)
-        layout.addWidget(OCRButton(), 4, 0)
 
         layout.setColumnStretch(3, 1)
-        layout.setRowStretch(5, 1)
+        layout.setRowStretch(4, 1)
 
         self.setLayout(layout)

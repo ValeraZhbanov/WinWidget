@@ -26,7 +26,6 @@
     <Compile Include="app\main.py" />
     <Compile Include="app\scripts\project_for_deepseek.py" />
     <Compile Include="app\service\drawing_manager.py" />
-    <Compile Include="app\service\ocr_service.py" />
     <Compile Include="app\service\timer_service.py" />
     <Compile Include="app\service\telegram_service.py" />
     <Compile Include="app\service\overlay_manager.py" />

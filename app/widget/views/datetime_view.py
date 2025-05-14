@@ -1,14 +1,13 @@
 ﻿
 import logging
 from PyQt6.QtWidgets import QWidget, QLabel, QGridLayout
-from PyQt6.QtCore import Qt, QTimer, QDateTime
-from PyQt6.QtCore import QLocale
+from PyQt6.QtCore import Qt, QTimer, QDateTime, QLocale
 from app.core.config import configs
 
 class DateTimeView(QWidget):
     def __init__(self):
         super().__init__()
-        self.setAccessibleName("DateTimeView")
+        self.setObjectName("DateTimeView")
         
         self.locale = QLocale()
         self.layout = QGridLayout()    
@@ -18,11 +17,11 @@ class DateTimeView(QWidget):
         self.setLayout(self.layout)
         
         self.time_label = QLabel()
-        self.time_label.setAccessibleName("TimeLabel")
+        self.time_label.setObjectName("TimeLabel")
         self.layout.addWidget(self.time_label, 0, 0)
 
         self.date_label = QLabel()
-        self.date_label.setAccessibleName("DateLabel")
+        self.date_label.setObjectName("DateLabel")
         self.layout.addWidget(self.date_label, 1, 0)
         
         self.update_time()
