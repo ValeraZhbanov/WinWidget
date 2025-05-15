@@ -10,7 +10,7 @@ class Configs(BaseSettings):
     DEBUG: bool = ENV == "dev"
     LOGGING_LEVEL: int = logging.DEBUG if DEBUG else logging.INFO
 
-    PROJECT_NAME: str = "win-widget"
+    PROJECT_NAME: str = "WinWidget"
     PROJECT_TITLE: str = ""
     PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     RESOURCES_DIR: str = os.path.join(PROJECT_ROOT, 'resources')

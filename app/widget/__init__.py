@@ -4,7 +4,6 @@ from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QApplication
 from app.service.drawing_manager import DrawingManager
 from app.service.overlay_manager import OverlayManager
-from app.widget.views.base_frame import BaseFrame
 from app.core.config import configs
 
 
@@ -44,31 +43,8 @@ class WinWidget:
         with open(configs.STYLES_PATH, "r", encoding="utf-8") as f:
             self.app.setStyleSheet(f.read())
 
-        self.is_visible = False
-
-
         self.drawing_manager = DrawingManager()
-
         self.overlay_manager = OverlayManager()
-        self.overlay_manager.activation_changed.connect(self.toggle_widget)
-        self.overlay_manager.start()
-
-        self.frame = BaseFrame()
-        self.frame.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
-
-    def toggle_widget(self, is_visible):
-
-        if self.is_visible == is_visible:
-            return
-
-        self.is_visible = is_visible
-
-        if self.is_visible:
-            self.frame.animation.start()
-        else:
-            self.frame.disappear_animation.start()
-
-        self.frame.setVisible(self.is_visible)
 
     def run(self):
         sys.exit(self.app.exec())

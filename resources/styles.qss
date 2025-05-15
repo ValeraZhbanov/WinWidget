@@ -24,20 +24,20 @@ QPushButton:pressed {
     margin: 0;
 }
 
-#MainFrame {
+QMainWidget {
     background: palette(dark);
     border: 1px solid palette(mid);
     border-radius: 0;
     padding: 0;
 }
 
-#MainFrame QGroupBox {
+QMainWidget ButtonsGroup {
     border: none;
     margin: 0;
     padding: 0;
 }
 
-#MainFrame QPushButton {
+QMainWidget ButtonsGroup QPushButton, QMainWidget ButtonsGroup QVSeparator {
     min-width: 25px;
     max-width: 25px;
     min-height: 25px;
@@ -46,18 +46,17 @@ QPushButton:pressed {
     margin: 0;
 }
 
-
-#MainFrame #DateTimeView {
+QMainWidget #DateTimeView {
     border: none;
     margin: 0;
     padding: 0;
 }
 
-#MainFrame #DateTimeView #TimeLabel {
+QMainWidget #DateTimeView #TimeLabel {
     font-size: 30pt;
 }
 
-#MainFrame #DateTimeView #DateLabel {
+QMainWidget #DateTimeView #DateLabel {
     font-size: 20pt;
 }
 
@@ -68,7 +67,6 @@ QToolTip {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     opacity: 240;
 }
-
 
 QLinesInputBox {
     background: palette(dark);

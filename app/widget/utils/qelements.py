@@ -1,13 +1,21 @@
-﻿from PyQt6.QtWidgets import QFrame, QDialog, QLabel, QTextEdit, QDialogButtonBox, QVBoxLayout
-from PyQt6.QtCore import Qt, QEvent
+﻿from PyQt6.QtWidgets import QWidget, QFrame, QDialog, QLabel, QTextEdit, QDialogButtonBox, QVBoxLayout
+from PyQt6.QtCore import Qt, QEvent, pyqtSignal
 
 
-class QSeparator(QFrame):
+class QHSeparator(QFrame):
     def __init__(self):
         super().__init__()
         self.setFrameShape(QFrame.Shape.HLine)
         self.setFrameShadow(QFrame.Shadow.Sunken)
         self.setFixedHeight(1)
+
+
+class QVSeparator(QFrame):
+    def __init__(self):
+        super().__init__()
+        self.setFrameShape(QFrame.Shape.VLine)
+        self.setFrameShadow(QFrame.Shadow.Sunken)
+        self.setFixedWidth(1)
 
 
 class QLinesInputBox(QDialog):
@@ -50,3 +58,21 @@ class QLinesInputBox(QDialog):
 
     def toPlainText(self):
         return self.text_edit.toPlainText()
+
+
+
+class QHoveredWidget(QFrame):
+    mouse_enter = pyqtSignal()
+    mouse_leave = pyqtSignal()
+
+    def __init__(self):
+        super().__init__()
+        self.setMouseTracking(True)
+
+    def enterEvent(self, a0):
+        self.mouse_enter.emit()
+        return super().enterEvent(a0)
+
+    def leaveEvent(self, a0):
+        self.mouse_leave.emit()
+        return super().leaveEvent(a0)

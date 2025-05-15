@@ -1,7 +1,7 @@
 ﻿import logging
 import ctypes
 from ctypes import wintypes
-from PyQt6.QtCore import QObject, QRect, QPoint, Qt, QEvent, pyqtSignal
+from PyQt6.QtCore import QObject, QRect, QPoint, Qt, QEvent, pyqtSignal, QTimer
 from PyQt6.QtGui import QColor, QMouseEvent, QPainter, QPen, QBrush, QPolygon
 from PyQt6.QtWidgets import QApplication, QWidget
 from typing import Set
@@ -107,7 +107,7 @@ class DrawingOverlay(QWidget):
         
         screen = QApplication.primaryScreen().geometry()
         self.setGeometry(screen)
-        self.setCursor(Qt.CursorShape.CrossCursor)        
+        self.setCursor(Qt.CursorShape.CrossCursor)   
 
     def install_hook(self):
 
@@ -138,12 +138,21 @@ class DrawingOverlay(QWidget):
         self.hook_id = user32.SetWindowsHookExA(14, self.hook_callback, None, 0)
         logging.debug(f"Mouse hook install")
 
+    def update(self):
+        super().update()
+
+        if 0 < len(self.drawing_manager.figures) or self.drawing_manager.current_figure is not None:
+            if not self.isVisible():
+                self.show()
+        else:
+            if self.isVisible():
+                QTimer.singleShot(50, self.hide) 
+
     def remove_hook(self):
         if self.hook_id:
             user32.UnhookWindowsHookEx(self.hook_id)
             self.hook_id = None
             logging.debug(f"Mouse hook drop")
-
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -181,16 +190,20 @@ class DrawingManager(QObject):
         
         self.figures: Set[Figure] = set()
         self.overlay = DrawingOverlay(self)
-        self.overlay.show()
+        self.overlay.hide()
         
         self.current_figure_start = None
         self.current_figure_type = None
         self.current_figure = None
 
+    def overlay_update(self):
+        self.overlay.update()
+
     def new_figure(self, FigureType):
         self.reset_state()
         self.current_figure_type = FigureType
         self.overlay.install_hook()
+        self.overlay.update()
         logging.debug(f"New figure mode: {FigureType.__name__}")
 
     def remove_figure(self, figure):

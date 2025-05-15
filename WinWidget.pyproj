@@ -22,7 +22,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app\core\config.py" />
-    <Compile Include="app\service.py" />
     <Compile Include="app\main.py" />
     <Compile Include="app\scripts\project_for_deepseek.py" />
     <Compile Include="app\service\drawing_manager.py" />
@@ -42,10 +41,11 @@
     <Compile Include="app\widget\views\buttons\text_buttons.py" />
     <Compile Include="app\widget\views\buttons\__init__.py" />
     <Compile Include="app\widget\views\datetime_view.py" />
-    <Compile Include="app\widget\views\base_frame.py" />
+    <Compile Include="app\widget\views\main_widget.py" />
     <Compile Include="app\widget\views\__init__.py" />
     <Compile Include="app\widget\__init__.py" />
     <Compile Include="app\__init__.py" />
+    <Compile Include="service.pyw" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />

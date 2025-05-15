@@ -24,10 +24,15 @@ class DateTimeView(QWidget):
         self.date_label.setObjectName("DateLabel")
         self.layout.addWidget(self.date_label, 1, 0)
         
-        self.update_time()
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_time)
+        
+    def start(self):
+        self.update_time()
         self.timer.start(configs.TIME_INTERVAL_UPDATE)
+
+    def stop(self):
+        self.timer.stop()
 
     def update_time(self):
         current_time = QDateTime.currentDateTime()

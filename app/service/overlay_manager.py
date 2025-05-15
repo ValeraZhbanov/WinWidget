@@ -1,14 +1,24 @@
-﻿
-import logging
-from PyQt6.QtCore import Qt
-from PyQt6.QtCore import QObject, QTimer, QRect, pyqtSignal
-from PyQt6.QtGui import QCursor, QPainter, QColor, QPen
-from PyQt6.QtWidgets import QWidget
+﻿import logging
+from PyQt6.QtCore import Qt, QObject, QRect, pyqtSignal, QEvent, QTimer
+from PyQt6.QtGui import QCursor
+from PyQt6.QtWidgets import QApplication, QLineEdit, QTextEdit, QComboBox, QSpinBox, QDateTimeEdit
+from app.widget.views.main_widget import QMainWidget
+from app.widget.utils.qelements import QHoveredWidget
 from app.core.config import configs
 
 
+class QOverlayWidget(QHoveredWidget):
+    def __init__(self):
+        super().__init__()
+        self.setObjectName("OverlayWidget")
+        self.setWindowFlags(
+            Qt.WindowType.FramelessWindowHint |
+            Qt.WindowType.WindowStaysOnTopHint |
+            Qt.WindowType.Tool
+        )
+
+
 class OverlayManager(QObject):
-    activation_changed = pyqtSignal(bool)
 
     _instance = None
 
@@ -24,47 +34,54 @@ class OverlayManager(QObject):
         super().__init__()
         self.__initialized = True
 
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.check_position)
-        self.is_active = False
-
         self.target_rect = QRect(*configs.TARGET_RECT)
         self.widget_rect = QRect(*configs.WIDGET_RECT)
         
-        self.overlay = QWidget()
-        self.overlay.setObjectName("OverlayWidget")
-
-        self.overlay.setWindowFlags(
-            Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.WindowStaysOnTopHint |
-            Qt.WindowType.Tool |
-            Qt.WindowType.WindowTransparentForInput
-        )
-
+        self.overlay = QOverlayWidget()
         self.overlay.setGeometry(self.target_rect)
         self.overlay.show()
 
-    def start(self):
-        self.timer.start(configs.MOUSE_INTERVAL_UPDATE)
-        logging.info("Mouse tracking started")
+        self.main = QMainWidget()
+        self.main.hide()
 
-    def stop(self):
-        self.timer.stop()
-        self.overlay.close()
-        logging.info("Mouse tracking stopped")
+        self.overlay.mouse_enter.connect(self.main_show)
 
-    def check_position(self):
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.check_visible_conditions)
+        self.timer.setInterval(configs.MOUSE_INTERVAL_UPDATE)
+
+    def main_show(self):
+
+        if self.main.isVisible():
+            return        
+
+        self.main.show()
+        self.timer.start()
+
+    def check_visible_conditions(self):
+        logging.debug(f"Mouse position check")
         pos = QCursor.pos()
         self.overlay.update()
 
-        if self.target_rect.contains(pos) or (self.is_active and self.widget_rect.contains(pos)):
-            if not self.is_active:
-                self.is_active = True
-                self.activation_changed.emit(True)
+        if self.target_rect.contains(pos) or (self.main.isVisible() and self.widget_rect.contains(pos)) or self.app_has_focus():
+            if not self.main.isVisible():
+                self.main.show()
                 logging.debug(f"Mouse in target area {pos}")
 
         else:
-            if self.is_active:
-                self.is_active = False
-                self.activation_changed.emit(False)
+            if self.main.isVisible():
+                self.main.hide()
+                self.timer.stop()
                 logging.debug(f"Mouse outside area {pos}")
+
+    def app_has_focus(self):
+        app = QApplication.instance()
+        current_widget = app.focusWidget()
+        input_widget_classes = (QLineEdit, QTextEdit, QComboBox, QSpinBox, QDateTimeEdit)
+    
+        if not current_widget:
+            return False
+
+        return isinstance(current_widget, input_widget_classes)
+
+        
