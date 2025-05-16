@@ -1,4 +1,5 @@
 ﻿
+import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QGroupBox, QGridLayout
 from app.widget.views.buttons.text_buttons import LayoutSwitchButton, TelegramButton
@@ -14,7 +15,6 @@ class ButtonsGroup(QGroupBox):
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         layout.setContentsMargins(0, 0, 0, 0)
 
-
         items = [
             [LayoutSwitchButton(), TelegramButton(), QVSeparator(), NotepadButton(), CmdAdminButton(), ZapretButton()],
             [RectangleButton(), ArrowButton(), CleanButton()],
@@ -25,7 +25,4 @@ class ButtonsGroup(QGroupBox):
             for col_it, item in enumerate(row):
                 layout.addWidget(item, row_it, col_it)
         
-
-
-
         self.setLayout(layout)

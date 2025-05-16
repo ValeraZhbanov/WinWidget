@@ -6,6 +6,7 @@ QSeparator {
 QPushButton {
     background: palette(mid);
     border-radius: 4px;
+    qproperty-iconcolor: palette(button-text);
 }
 
 QPushButton:hover {
