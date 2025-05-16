@@ -28,21 +28,6 @@ class WinWidget:
         self.app = QApplication(sys.argv)
         self.app.setStyle("Fusion")
 
-        palette = self.app.palette()
-        palette.setColor(QPalette.ColorRole.Window, QColor(43, 43, 43))
-        palette.setColor(QPalette.ColorRole.WindowText, Qt.GlobalColor.white)
-        palette.setColor(QPalette.ColorRole.Base, QColor(58, 58, 58))
-        palette.setColor(QPalette.ColorRole.AlternateBase, QColor(46, 46, 46))
-        palette.setColor(QPalette.ColorRole.ToolTipBase, QColor(58, 58, 58))
-        palette.setColor(QPalette.ColorRole.ToolTipText, Qt.GlobalColor.white)
-        palette.setColor(QPalette.ColorRole.Text, Qt.GlobalColor.white)
-        palette.setColor(QPalette.ColorRole.Button, QColor(58, 58, 58))
-        palette.setColor(QPalette.ColorRole.ButtonText, Qt.GlobalColor.white)
-        palette.setColor(QPalette.ColorRole.BrightText, Qt.GlobalColor.red)
-        palette.setColor(QPalette.ColorRole.Highlight, QColor(10, 120, 10))
-        palette.setColor(QPalette.ColorRole.HighlightedText, Qt.GlobalColor.black)
-        self.app.setPalette(palette)
-
         with open(configs.STYLES_PATH, "r", encoding="utf-8") as f:
             self.app.setStyleSheet(f.read())
 

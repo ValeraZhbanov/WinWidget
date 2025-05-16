@@ -1,8 +1,8 @@
 ﻿
 import os
-from PyQt6.QtGui import QIcon, QImage, QPixmap, QPainter
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtGui import QIcon, QImage, QPixmap, QPainter, QPalette
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtWidgets import QPushButton, QApplication
 from app.core.config import configs
 
 class BaseButton(QPushButton):
@@ -19,11 +19,20 @@ class BaseButton(QPushButton):
 
 
     def setIcon(self, icon_path):
+        app: QApplication = QApplication.instance()
+        palette: QPalette = app.palette()
+        color = palette.color(QPalette.ColorGroup.Normal, QPalette.ColorRole.ButtonText)
 
         image = QImage(icon_path)
             
-        image.invertPixels(QImage.InvertMode.InvertRgb)
-            
+        image.convertTo(QImage.Format.Format_ARGB32)
+
+        for y in range(image.height()):
+            for x in range(image.width()):
+                pixel_color = image.pixelColor(x, y)
+                if pixel_color == Qt.GlobalColor.black:
+                    image.setPixelColor(x, y, color)
+                
         pixmap = QPixmap.fromImage(image)
         icon = QIcon(pixmap)
         
