@@ -2,3 +2,4 @@ PyQt6
 pywin32
 pydantic-settings
 python-telegram-bot
+requests
