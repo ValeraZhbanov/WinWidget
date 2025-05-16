@@ -3,7 +3,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QGroupBox, QGridLayout
 from app.widget.views.buttons.text_buttons import LayoutSwitchButton, TelegramButton
 from app.widget.views.buttons.graphic_buttons import RectangleButton, ArrowButton, CleanButton
-from app.widget.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton
+from app.widget.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton, ZapretButton
 from app.widget.views.buttons.time_buttons import TimerButton
 from app.widget.utils.qelements import QVSeparator
 
@@ -16,7 +16,7 @@ class ButtonsGroup(QGroupBox):
 
 
         items = [
-            [LayoutSwitchButton(), TelegramButton(), QVSeparator(), NotepadButton(), CmdButton(), CmdAdminButton()],
+            [LayoutSwitchButton(), TelegramButton(), QVSeparator(), NotepadButton(), CmdAdminButton(), ZapretButton()],
             [RectangleButton(), ArrowButton(), CleanButton()],
             [TimerButton()],
         ]

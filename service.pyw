@@ -1,7 +1,7 @@
-﻿import logging
-from app.widget import WinWidget
+﻿from app.widget import WinWidget
+from app.core.config import configs
 
-logging.basicConfig(level=logging.CRITICAL)
+configs.ENV = 'prod'
 
 if __name__ == "__main__":
     widget = WinWidget()

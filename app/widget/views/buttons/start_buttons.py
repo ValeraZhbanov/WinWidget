@@ -4,6 +4,7 @@ import ctypes
 import logging
 import subprocess
 from app.widget.views.buttons.base_button import BaseButton
+from app.core.config import configs
 
 
 class NotepadButton(BaseButton):
@@ -19,7 +20,7 @@ class NotepadButton(BaseButton):
 
 class CmdButton(BaseButton):
     def __init__(self):
-        super().__init__("icons8-cmd-80.png", "Консоль")
+        super().__init__("icons8-cmd-50.png", "Консоль")
         
     def on_click(self):
         try:
@@ -31,7 +32,7 @@ class CmdButton(BaseButton):
 
 class CmdAdminButton(BaseButton):
     def __init__(self):
-        super().__init__("icons8-cmd-50.png", "Консоль администратора")
+        super().__init__("icons8-cmd-80.png", "Консоль администратора")
         
     def on_click(self):
         try:
@@ -39,3 +40,14 @@ class CmdAdminButton(BaseButton):
             ctypes.windll.shell32.ShellExecuteW(None, 'runas', 'cmd.exe', f'/K "cd /d {user_profile}"', user_profile, 1)
         except Exception as e:
             logging.error(f"Ошибка запуска командной строки от имени администратора: {e}")
+
+
+class ZapretButton(BaseButton):
+    def __init__(self):
+        super().__init__("icons8-hack-64.png", "Zapret")
+        
+    def on_click(self):
+        try:
+            ctypes.windll.shell32.ShellExecuteW(None, 'runas', configs.ZAPRET_SERVICE_BAT, None, None, 1)
+        except Exception as e:
+            logging.error(f"Ошибка запуска zapret-service.bat от имени администратора: {e}")

@@ -1,4 +1,5 @@
 ﻿import sys
+import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QApplication
@@ -21,6 +22,8 @@ class WinWidget:
             return
         super().__init__()
         self.__initialized = True
+
+        logging.basicConfig(level=configs.LOGGING_LEVEL)
 
         self.app = QApplication(sys.argv)
         self.app.setStyle("Fusion")
