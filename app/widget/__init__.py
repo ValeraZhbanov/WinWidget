@@ -1,11 +1,27 @@
 ﻿import sys
 import logging
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QApplication
 from app.service.drawing_manager import DrawingManager
 from app.service.overlay_manager import OverlayManager
 from app.core.config import configs
+
+
+class QWinWidgetApplication(QApplication):
+    def __init__(self, argv):
+        super().__init__(argv)
+
+    def event(self, event: QEvent):
+        if event.type() in (QEvent.Type.ApplicationPaletteChange,):
+            self.loadQssStyle()
+
+        return super().event(event)
+        
+    def loadQssStyle(self):
+        logging.debug('Load qss styles')
+        with open(configs.STYLES_PATH, "r", encoding="utf-8") as f:
+            self.setStyleSheet(f.read())
 
 
 class WinWidget:
@@ -25,11 +41,8 @@ class WinWidget:
 
         logging.basicConfig(level=configs.LOGGING_LEVEL)
 
-        self.app = QApplication(sys.argv)
+        self.app = QWinWidgetApplication(sys.argv)
         self.app.setStyle("Fusion")
-
-        with open(configs.STYLES_PATH, "r", encoding="utf-8") as f:
-            self.app.setStyleSheet(f.read())
 
         self.drawing_manager = DrawingManager()
         self.overlay_manager = OverlayManager()
