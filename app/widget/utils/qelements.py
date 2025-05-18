@@ -1,5 +1,9 @@
-﻿from PyQt6.QtWidgets import QWidget, QFrame, QDialog, QLabel, QTextEdit, QDialogButtonBox, QVBoxLayout
-from PyQt6.QtCore import Qt, QEvent, pyqtSignal
+﻿import logging
+from PyQt6.QtWidgets import QWidget, QFrame, QDialog, QLabel, QTextEdit, QDialogButtonBox, QVBoxLayout, QMessageBox
+from PyQt6.QtCore import Qt, QEvent, pyqtSignal, QTimer
+
+
+
 
 
 class QHSeparator(QFrame):
@@ -18,17 +22,25 @@ class QVSeparator(QFrame):
         self.setFixedWidth(1)
 
 
-class QLinesInputBox(QDialog):
+class QDialogParentHide(QDialog):
     def __init__(self, parent):
         super().__init__(parent)
-        
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
             Qt.WindowType.Dialog
         )
         self.setGeometry(parent.geometry())
-        
         parent.installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.Type.Hide:
+            self.reject()
+        return super().eventFilter(obj, event)
+
+
+class QLinesInputDialog(QDialogParentHide):
+    def __init__(self, parent):
+        super().__init__(parent)
         
         layout = QVBoxLayout()
         layout.setContentsMargins(15, 15, 15, 15)
@@ -58,7 +70,6 @@ class QLinesInputBox(QDialog):
 
     def toPlainText(self):
         return self.text_edit.toPlainText()
-
 
 
 class QHoveredWidget(QFrame):

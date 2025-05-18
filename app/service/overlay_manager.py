@@ -16,6 +16,7 @@ class QOverlayWidget(QHoveredWidget):
             Qt.WindowType.WindowStaysOnTopHint |
             Qt.WindowType.Tool
         )
+        self.setGeometry(*configs.TARGET_RECT)
 
 
 class OverlayManager(QObject):
@@ -38,7 +39,6 @@ class OverlayManager(QObject):
         self.widget_rect = QRect(*configs.WIDGET_RECT)
         
         self.overlay = QOverlayWidget()
-        self.overlay.setGeometry(self.target_rect)
         self.overlay.show()
 
         self.main = QMainWidget()

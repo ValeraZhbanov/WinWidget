@@ -6,6 +6,9 @@ QSeparator {
 QPushButton {
     background: palette(mid);
     border-radius: 4px;
+}
+
+QIconButton {
     qproperty-iconcolor: palette(button-text);
 }
 
@@ -15,6 +18,27 @@ QPushButton:hover {
 
 QPushButton:pressed {
     background: palette(mid);
+}
+
+#ToastWidget {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Цвета настраиваются в классе, нужно для работы анимации */
+#ToastWidget ToastMessage { 
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+#ToastWidget ToastMessage #TimeLabel {
+    font-size: 10pt;
+}
+
+#ToastWidget ToastMessage #MessageLabel {
+    font-size: 14pt;
 }
 
 #OverlayWidget {
@@ -69,17 +93,17 @@ QToolTip {
     opacity: 240;
 }
 
-QLinesInputBox {
+QLinesInputDialog {
     background: palette(dark);
 }
 
-QLinesInputBox QTextEdit {
+QLinesInputDialog QTextEdit {
     border: none;
     padding: 10px;
     font-size: 12pt;
 }
 
-QLinesInputBox QPushButton#okButton, QLinesInputBox QPushButton#cancelButton {
+QLinesInputDialog QPushButton#okButton, QLinesInputDialog QPushButton#cancelButton {
     min-width: 100px;
     min-height: 30px;
     font-size: 12pt;

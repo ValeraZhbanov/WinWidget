@@ -18,16 +18,17 @@ class QMainWidget(QHoveredWidget):
         self.setMouseTracking(True)
         self.setGeometry(QRect(*configs.WIDGET_RECT))
         self.setFixedSize(*configs.WIDGET_RECT[2:])
+        
+        self.animation_show = QPropertyAnimation(self, b"windowOpacity")
+        self.animation_show.setDuration(300)
+        self.animation_show.setStartValue(0)
+        self.animation_show.setEndValue(1)
 
-        self.animation = QPropertyAnimation(self, b"windowOpacity")
-        self.animation.setDuration(300)
-        self.animation.setStartValue(0)
-        self.animation.setEndValue(1)
-
-        self.disappear_animation = QPropertyAnimation(self, b"windowOpacity")
-        self.disappear_animation.setDuration(300)
-        self.disappear_animation.setStartValue(1)
-        self.disappear_animation.setEndValue(0)
+        self.animation_hide = QPropertyAnimation(self, b"windowOpacity")
+        self.animation_hide.setDuration(300)
+        self.animation_hide.setStartValue(1)
+        self.animation_hide.setEndValue(0)
+        self.animation_hide.finished.connect(self._on_hide_finished)
 
         shadow = QGraphicsDropShadowEffect()
         shadow.setBlurRadius(15)
@@ -53,12 +54,14 @@ class QMainWidget(QHoveredWidget):
 
     def show(self):
         self.datetime_view.start()
-        self.animation.start()
+        self.animation_show.start()
         self.raise_()
         self.activateWindow()
         return super().show()
 
     def hide(self):
+        self.animation_hide.start()
+
+    def _on_hide_finished(self):
         self.datetime_view.stop()
-        self.disappear_animation.start()
         return super().hide()

@@ -5,6 +5,7 @@ from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QApplication
 from app.service.drawing_manager import DrawingManager
 from app.service.overlay_manager import OverlayManager
+from app.service.toast_manager import ToastManager
 from app.core.config import configs
 
 
@@ -44,6 +45,7 @@ class WinWidget:
         self.app = QWinWidgetApplication(sys.argv)
         self.app.setStyle("Fusion")
 
+        self.toast_manager = ToastManager()
         self.drawing_manager = DrawingManager()
         self.overlay_manager = OverlayManager()
 

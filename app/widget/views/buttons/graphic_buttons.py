@@ -1,12 +1,13 @@
 ﻿
 import os
-from app.widget.views.buttons.base_button import BaseButton
+from app.widget.views.buttons.icon_button import QIconButton
 from app.service.drawing_manager import DrawingManager, Rectangle, Arrow
+from app.service.toast_manager import ToastManager
 from app.core.config import configs
 
 
 
-class RectangleButton(BaseButton):
+class RectangleButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-rectangle-80.png", "Нарисовать прямоугольник")
         
@@ -14,7 +15,7 @@ class RectangleButton(BaseButton):
         DrawingManager().new_figure(Rectangle)
 
 
-class ArrowButton(BaseButton):
+class ArrowButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-arrow-50.png", "Нарисовать стрелку")
         
@@ -22,7 +23,7 @@ class ArrowButton(BaseButton):
         DrawingManager().new_figure(Arrow)
 
 
-class CleanButton(BaseButton):
+class CleanButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-clean-50.png", "Нарисовать стрелку")
         

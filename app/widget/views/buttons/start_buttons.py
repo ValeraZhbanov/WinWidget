@@ -3,11 +3,12 @@ import os
 import ctypes
 import logging
 import subprocess
-from app.widget.views.buttons.base_button import BaseButton
+from app.widget.views.buttons.icon_button import QIconButton
+from app.service.toast_manager import ToastManager
 from app.core.config import configs
 
 
-class NotepadButton(BaseButton):
+class NotepadButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-notepad-50.png", "Блокнот")
         
@@ -18,7 +19,7 @@ class NotepadButton(BaseButton):
             logging.error(f"Ошибка запуска блокнота: {e}")
 
 
-class CmdButton(BaseButton):
+class CmdButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-cmd-50.png", "Консоль")
         
@@ -30,7 +31,7 @@ class CmdButton(BaseButton):
             logging.error(f"Ошибка запуска командной строки: {e}")
 
 
-class CmdAdminButton(BaseButton):
+class CmdAdminButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-cmd-80.png", "Консоль администратора")
         
@@ -42,7 +43,7 @@ class CmdAdminButton(BaseButton):
             logging.error(f"Ошибка запуска командной строки от имени администратора: {e}")
 
 
-class ZapretButton(BaseButton):
+class ZapretButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-hack-64.png", "Zapret")
         

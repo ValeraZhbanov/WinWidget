@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QPushButton, QApplication
 from app.core.config import configs
 
 
-class BaseButton(QPushButton):
+class QIconButton(QPushButton):
     onclick = pyqtSignal()
 
     def __init__(self, icon_file, tool_tip):

@@ -1,14 +1,16 @@
 ﻿
+import re
 import logging
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QGuiApplication
-from app.widget.views.buttons.base_button import BaseButton
-from app.widget.utils.qelements import QLinesInputBox
+from app.widget.views.buttons.icon_button import QIconButton
+from app.widget.utils.qelements import QLinesInputDialog
 from app.service.telegram_service import TelegramService
+from app.service.toast_manager import ToastManager
 from app.core.config import configs
 
 
-class LayoutSwitchButton(BaseButton):
+class LayoutSwitchButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-switch-50.png", "Переключить раскладку RU/EN")
 
@@ -33,6 +35,7 @@ class LayoutSwitchButton(BaseButton):
             text = clipboard.text()
         
             if not text:
+                ToastManager().add('Буфер обмена пуст')
                 return
             
             if any(c in self.en_to_ru for c in text):
@@ -41,21 +44,50 @@ class LayoutSwitchButton(BaseButton):
                 translated = ''.join([self.ru_to_en.get(c, c) for c in text])
         
             clipboard.setText(translated)
+            ToastManager().add('Раскладка клавиатуры изменена')
         except:
-            logging.error(f"Ошибка преобразования текста в браузере: {e}")
+            logging.error(f"Ошибка преобразования текста: {e}")
 
 
-class TelegramButton(BaseButton):
+class TelegramButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-telegram-50.png", "Отправить заметку в Telegram")
 
     def on_click(self):
-        dialog = QLinesInputBox(self.window())
+        dialog = QLinesInputDialog(self.window())
         
         if dialog.exec() == QDialog.DialogCode.Accepted:
             text = dialog.toPlainText()
             if text:
                 if TelegramService().send_message(text):
-                    logging.info("Message sent to Telegram")
+                    ToastManager().add("Сообщение отправлено Telegram")
                 else:
-                    logging.warning("Failed to send message to Telegram")
+                    ToastManager().add("Не удалось отправить сообщение Telegram")
+
+
+class AITextConvertButton(QIconButton):
+    def __init__(self):
+        super().__init__("icons8-text-color-48.png", "Автозамена спецсимволов AI текста")
+
+        self.allowed_pattern = re.compile(r'[^a-zA-Zа-яА-ЯёЁ0-9 .,!?;:\-()\[\]{}<>@#$%^&*_+=\\/\\|\'"«»\n]')
+
+    def on_click(self):
+        try:
+            clipboard = QGuiApplication.clipboard()
+            text = clipboard.text()
+            
+            if not text:
+                ToastManager().add('Буфер обмена пуст')
+                return
+            
+            cleaned_text = self.allowed_pattern.sub(' ', text)
+            cleaned_text = re.sub(' +', ' ', cleaned_text)
+            
+            if cleaned_text != text:
+                clipboard.setText(cleaned_text)
+                ToastManager().add(f"Текст изменен")
+            else:
+                ToastManager().add("Текст не содержит недопустимых символов")
+                
+        except Exception as e:
+            logging.error(f"Ошибка преобразования текста: {e}")

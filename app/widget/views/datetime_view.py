@@ -1,10 +1,10 @@
 ﻿
 import logging
-from PyQt6.QtWidgets import QWidget, QLabel, QGridLayout
+from PyQt6.QtWidgets import QFrame, QLabel, QGridLayout
 from PyQt6.QtCore import Qt, QTimer, QDateTime, QLocale
 from app.core.config import configs
 
-class DateTimeView(QWidget):
+class DateTimeView(QFrame):
     def __init__(self):
         super().__init__()
         self.setObjectName("DateTimeView")

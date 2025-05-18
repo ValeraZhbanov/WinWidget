@@ -1,10 +1,11 @@
 ﻿
 from PyQt6.QtWidgets import QInputDialog
-from app.widget.views.buttons.base_button import BaseButton
+from app.widget.views.buttons.icon_button import QIconButton
 from app.service.timer_service import TimerService
+from app.service.toast_manager import ToastManager
 
 
-class TimerButton(BaseButton):
+class TimerButton(QIconButton):
     def __init__(self):
         super().__init__("icons8-timer-50.png", "Установить таймер")
         self.timer_service = TimerService()
