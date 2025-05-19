@@ -4,13 +4,15 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>e92baff7-c864-409d-b701-d3f122621523</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>app\main.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>WinWidget</Name>
     <RootNamespace>WinWidget</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,42 +23,40 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\core\config.py" />
-    <Compile Include="app\main.py" />
-    <Compile Include="app\scripts\project_for_deepseek.py" />
-    <Compile Include="app\service\drawing_manager.py" />
-    <Compile Include="app\service\toast_manager.py" />
-    <Compile Include="app\service\timer_service.py" />
-    <Compile Include="app\service\telegram_service.py" />
-    <Compile Include="app\service\overlay_manager.py" />
-    <Compile Include="app\service\__init__.py" />
-    <Compile Include="app\widget\utils\qelements.py" />
-    <Compile Include="app\widget\utils\helpers.py" />
-    <Compile Include="resources\styles.qss" />
-    <Compile Include="app\widget\utils\__init__.py" />
-    <Compile Include="app\widget\views\buttons\icon_button.py" />
-    <Compile Include="app\widget\views\buttons\graphic_buttons.py" />
-    <Compile Include="app\widget\views\buttons\tool_buttons.py" />
-    <Compile Include="app\widget\views\buttons\time_buttons.py" />
-    <Compile Include="app\widget\views\buttons\start_buttons.py" />
-    <Compile Include="app\widget\views\buttons\text_buttons.py" />
-    <Compile Include="app\widget\views\buttons\__init__.py" />
-    <Compile Include="app\widget\views\datetime_view.py" />
-    <Compile Include="app\widget\views\main_widget.py" />
-    <Compile Include="app\widget\views\__init__.py" />
-    <Compile Include="app\widget\__init__.py" />
+    <Compile Include="app\config.py" />
+    <Compile Include="app\views\dialogs\__init__.py" />
+    <Compile Include="app\views\__init__.py" />
     <Compile Include="app\__init__.py" />
+    <Compile Include="main.py" />
+    <Compile Include="app\scripts\project_for_deepseek.py" />
+    <Compile Include="app\services\drawing_service.py" />
+    <Compile Include="app\services\toast_service.py" />
+    <Compile Include="app\services\timer_service.py" />
+    <Compile Include="app\services\telegram_service.py" />
+    <Compile Include="app\services\overlay_service.py" />
+    <Compile Include="app\services\__init__.py" />
+    <Compile Include="app\views\qelements.py" />
+    <Compile Include="app\views\dialogs\lines_dialog.py" />
+    <Compile Include="app\views\dialogs\timer_dialogs.py" />
+    <Compile Include="resources\styles.qss" />
+    <Compile Include="app\views\buttons\graphic_buttons.py" />
+    <Compile Include="app\views\buttons\tool_buttons.py" />
+    <Compile Include="app\views\buttons\time_buttons.py" />
+    <Compile Include="app\views\buttons\start_buttons.py" />
+    <Compile Include="app\views\buttons\text_buttons.py" />
+    <Compile Include="app\views\buttons\__init__.py" />
+    <Compile Include="app\views\datetime_widget.py" />
+    <Compile Include="app\views\main_widget.py" />
+    <Compile Include="app\win_widget.py" />
     <Compile Include="service.pyw" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
-    <Folder Include="app\core\" />
     <Folder Include="app\scripts\" />
-    <Folder Include="app\widget\" />
-    <Folder Include="app\service\" />
-    <Folder Include="app\widget\utils\" />
-    <Folder Include="app\widget\views\" />
-    <Folder Include="app\widget\views\buttons\" />
+    <Folder Include="app\services\" />
+    <Folder Include="app\views\" />
+    <Folder Include="app\views\buttons\" />
+    <Folder Include="app\views\dialogs\" />
     <Folder Include="resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

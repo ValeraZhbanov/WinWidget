@@ -7,11 +7,11 @@ class Configs(BaseSettings):
 
     ENV: str = os.getenv('ENV', 'dev')
     DEBUG: bool = ENV == 'dev'
-    LOGGING_LEVEL: int = logging.DEBUG if DEBUG else logging.INFO
+    LOGGING_LEVEL: int = logging.DEBUG if DEBUG else logging.CRITICAL
 
     PROJECT_NAME: str = 'WinWidget'
     PROJECT_TITLE: str = ''
-    PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     RESOURCES_DIR: str = os.path.join(PROJECT_ROOT, 'resources')
 
     DATETIME_FORMAT: str = 'dd.MM.yyyy HH:mm:ss'

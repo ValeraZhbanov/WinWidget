@@ -1,6 +1,5 @@
-﻿from app import WinWidget, configs
-
-configs.ENV = 'prod'
+﻿
+from app import WinWidget
 
 if __name__ == "__main__":
     widget = WinWidget()

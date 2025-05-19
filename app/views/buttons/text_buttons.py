@@ -3,11 +3,11 @@ import re
 import logging
 from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QGuiApplication
-from app.widget.views.buttons.icon_button import QIconButton
-from app.widget.utils.qelements import QLinesInputDialog
-from app.service.telegram_service import TelegramService
-from app.service.toast_manager import ToastManager
-from app.core.config import configs
+from app.views.qelements import QIconButton
+from app.views.dialogs.lines_dialog import QLinesInputDialog
+from app.services.telegram_service import TelegramService
+from app.services.toast_service import ToastService
+from app.config import configs
 
 
 class LayoutSwitchButton(QIconButton):
@@ -35,7 +35,7 @@ class LayoutSwitchButton(QIconButton):
             text = clipboard.text()
         
             if not text:
-                ToastManager().add('Буфер обмена пуст')
+                ToastService().add('Буфер обмена пуст')
                 return
             
             if any(c in self.en_to_ru for c in text):
@@ -44,7 +44,7 @@ class LayoutSwitchButton(QIconButton):
                 translated = ''.join([self.ru_to_en.get(c, c) for c in text])
         
             clipboard.setText(translated)
-            ToastManager().add('Раскладка клавиатуры изменена')
+            ToastService().add('Раскладка клавиатуры изменена')
         except:
             logging.error(f"Ошибка преобразования текста: {e}")
 
@@ -60,9 +60,9 @@ class TelegramButton(QIconButton):
             text = dialog.toPlainText()
             if text:
                 if TelegramService().send_message(text):
-                    ToastManager().add("Сообщение отправлено Telegram")
+                    ToastService().add("Сообщение отправлено Telegram")
                 else:
-                    ToastManager().add("Не удалось отправить сообщение Telegram")
+                    ToastService().add("Не удалось отправить сообщение Telegram")
 
 
 class AITextConvertButton(QIconButton):
@@ -77,7 +77,7 @@ class AITextConvertButton(QIconButton):
             text = clipboard.text()
             
             if not text:
-                ToastManager().add('Буфер обмена пуст')
+                ToastService().add('Буфер обмена пуст')
                 return
             
             cleaned_text = self.allowed_pattern.sub(' ', text)
@@ -85,9 +85,9 @@ class AITextConvertButton(QIconButton):
             
             if cleaned_text != text:
                 clipboard.setText(cleaned_text)
-                ToastManager().add(f"Текст изменен")
+                ToastService().add(f"Текст изменен")
             else:
-                ToastManager().add("Текст не содержит недопустимых символов")
+                ToastService().add("Текст не содержит недопустимых символов")
                 
         except Exception as e:
             logging.error(f"Ошибка преобразования текста: {e}")

@@ -1,6 +1,6 @@
 ﻿import requests
 import logging
-from app.core.config import configs
+from app.config import configs
 
 class TelegramService:
     _instance = None

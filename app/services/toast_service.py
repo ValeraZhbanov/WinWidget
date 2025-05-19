@@ -2,8 +2,8 @@
 from PyQt6.QtCore import Qt, QObject, QRect, pyqtSignal, QEvent, QTimer, QPropertyAnimation, QPoint, QLocale, QDateTime, pyqtProperty
 from PyQt6.QtGui import QCursor, QColor, QPalette
 from PyQt6.QtWidgets import QApplication, QFrame, QVBoxLayout, QLabel, QSizePolicy
-from app.widget.utils.qelements import QHoveredWidget
-from app.core.config import configs
+from app.views.qelements import QHoveredWidget
+from app.config import configs
 
 
 class ToastMessage(QFrame):
@@ -142,7 +142,7 @@ class QToastWidget(QHoveredWidget):
                 oldest.hide_fast()
 
 
-class ToastManager(QObject):
+class ToastService(QObject):
 
     _instance = None
 
@@ -163,3 +163,4 @@ class ToastManager(QObject):
 
     def add(self, message):
         self.toast_widget.add_message(message)
+

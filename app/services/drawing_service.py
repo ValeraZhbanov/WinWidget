@@ -92,9 +92,9 @@ class Arrow(Figure):
 
 
 class DrawingOverlay(QWidget):
-    def __init__(self, drawing_manager):
+    def __init__(self, drawing_service):
         super().__init__()
-        self.drawing_manager = drawing_manager
+        self.drawing_service = drawing_service
         self.hook_id = None
         self.is_drawing = False
         
@@ -118,17 +118,17 @@ class DrawingOverlay(QWidget):
                 
                 if wParam == 0x0201:  # WM_LBUTTONDOWN
                     self.is_drawing = True
-                    self.drawing_manager.start_new_figure(pos)
+                    self.drawing_service.start_new_figure(pos)
                     return 1
                 
                 elif wParam == 0x0200 and self.is_drawing:  # WM_MOUSEMOVE
-                    self.drawing_manager.update_current_figure(pos)
-                    self.drawing_manager.overlay.update()
+                    self.drawing_service.update_current_figure(pos)
+                    self.drawing_service.overlay.update()
                 
                 elif wParam == 0x0202:  # WM_LBUTTONUP
                     if self.is_drawing:
                         self.is_drawing = False
-                        self.drawing_manager.finish_figure()
+                        self.drawing_service.finish_figure()
                         return 1
             
             return user32.CallNextHookEx(self.hook_id, nCode, wParam, lParam)
@@ -141,7 +141,7 @@ class DrawingOverlay(QWidget):
     def update(self):
         super().update()
 
-        if 0 < len(self.drawing_manager.figures) or self.drawing_manager.current_figure is not None:
+        if 0 < len(self.drawing_service.figures) or self.drawing_service.current_figure is not None:
             if not self.isVisible():
                 self.show()
         else:
@@ -158,11 +158,11 @@ class DrawingOverlay(QWidget):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         
-        for figure in self.drawing_manager.figures:
+        for figure in self.drawing_service.figures:
             figure.draw(painter)
             
-        if self.drawing_manager.current_figure:
-            self.drawing_manager.current_figure.draw(painter)
+        if self.drawing_service.current_figure:
+            self.drawing_service.current_figure.draw(painter)
             
         painter.end()
 
@@ -171,7 +171,7 @@ class DrawingOverlay(QWidget):
         super().closeEvent(event)
 
 
-class DrawingManager(QObject):
+class DrawingService(QObject):
     _instance = None
 
     finish_figure_signal = pyqtSignal(object)

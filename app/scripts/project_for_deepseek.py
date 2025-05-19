@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QGuiApplication
-from app.core.config import configs
+from app.config import configs
 
 
 def collect_py_files(base_dir="."):

@@ -2,11 +2,11 @@
 import logging
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QGroupBox, QGridLayout
-from app.widget.views.buttons.text_buttons import LayoutSwitchButton, TelegramButton, AITextConvertButton
-from app.widget.views.buttons.graphic_buttons import RectangleButton, ArrowButton, CleanButton
-from app.widget.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton, ZapretButton
-from app.widget.views.buttons.time_buttons import TimerButton
-from app.widget.utils.qelements import QVSeparator
+from app.views.buttons.text_buttons import LayoutSwitchButton, TelegramButton, AITextConvertButton
+from app.views.buttons.graphic_buttons import RectangleButton, ArrowButton, CleanButton
+from app.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton, ZapretButton
+from app.views.buttons.time_buttons import TimerQuick10Button, TimerQuick30Button, TimerQuick60Button, TimerDialogButton, TimersListButton
+from app.views.qelements import QVSeparator
 
 class ButtonsGroup(QGroupBox):
     def __init__(self):
@@ -18,7 +18,7 @@ class ButtonsGroup(QGroupBox):
         items = [
             [LayoutSwitchButton(), TelegramButton(), AITextConvertButton(), QVSeparator(), NotepadButton(), CmdAdminButton(), ZapretButton()],
             [RectangleButton(), ArrowButton(), CleanButton()],
-            [TimerButton()],
+            [TimerQuick10Button(), TimerQuick30Button(), TimerQuick60Button(), TimerDialogButton(), TimersListButton()]
         ]
 
         for row_it, row in enumerate(items):

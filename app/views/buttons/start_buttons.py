@@ -3,9 +3,9 @@ import os
 import ctypes
 import logging
 import subprocess
-from app.widget.views.buttons.icon_button import QIconButton
-from app.service.toast_manager import ToastManager
-from app.core.config import configs
+from app.views.qelements import QIconButton
+from app.services.toast_service import ToastService
+from app.config import configs
 
 
 class NotepadButton(QIconButton):
