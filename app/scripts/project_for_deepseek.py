@@ -14,7 +14,7 @@ def collect_py_files(base_dir="."):
             continue
         
         for file in files:
-            if file.endswith(".py") or file.endswith(".pyw") or file.endswith(".qss"):
+            if file.endswith(".py") or file.endswith(".pyw") or file.endswith(".qss") or file.endswith(".bat"):
                 full_path = Path(root) / file
                 py_files.append(full_path)
     return py_files
