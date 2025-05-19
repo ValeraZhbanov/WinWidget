@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import QDialog
 from PyQt6.QtGui import QGuiApplication
 from app.views.qelements import QIconButton
 from app.views.dialogs.lines_dialog import QLinesInputDialog
-from app.services.telegram_service import TelegramService
+from app.services.integration_service import IntegrationService, TelegramSendMessageNotebookBot
 from app.services.toast_service import ToastService
 from app.config import configs
 
@@ -45,7 +45,7 @@ class LayoutSwitchButton(QIconButton):
         
             clipboard.setText(translated)
             ToastService().add('Раскладка клавиатуры изменена')
-        except:
+        except Exception as exc:
             logging.error(f"Ошибка преобразования текста: {e}")
 
 
@@ -54,15 +54,23 @@ class TelegramButton(QIconButton):
         super().__init__("icons8-telegram-50.png", "Отправить заметку в Telegram")
 
     def on_click(self):
-        dialog = QLinesInputDialog(self.window())
+        try:
+            dialog = QLinesInputDialog(self.window())
         
-        if dialog.exec() == QDialog.DialogCode.Accepted:
-            text = dialog.toPlainText()
-            if text:
-                if TelegramService().send_message(text):
-                    ToastService().add("Сообщение отправлено Telegram")
-                else:
-                    ToastService().add("Не удалось отправить сообщение Telegram")
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                text = dialog.toPlainText()
+                if text:
+                    IntegrationService().run_task(TelegramSendMessageNotebookBot(text, self._on_sended))
+
+        except Exception as exc:
+            logging.error(f"Ошибка преобразования текста: {exc}")
+
+                
+    def _on_sended(self, data):
+        if data:
+            ToastService().add("Сообщение отправлено Telegram")
+        else:
+            ToastService().add("Не удалось отправить сообщение Telegram")
 
 
 class AITextConvertButton(QIconButton):
@@ -89,5 +97,5 @@ class AITextConvertButton(QIconButton):
             else:
                 ToastService().add("Текст не содержит недопустимых символов")
                 
-        except Exception as e:
-            logging.error(f"Ошибка преобразования текста: {e}")
+        except Exception as exc:
+            logging.error(f"Ошибка преобразования текста: {exc}")

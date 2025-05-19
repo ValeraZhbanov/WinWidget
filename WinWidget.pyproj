@@ -32,7 +32,7 @@
     <Compile Include="app\services\drawing_service.py" />
     <Compile Include="app\services\toast_service.py" />
     <Compile Include="app\services\timer_service.py" />
-    <Compile Include="app\services\telegram_service.py" />
+    <Compile Include="app\services\integration_service.py" />
     <Compile Include="app\services\overlay_service.py" />
     <Compile Include="app\services\__init__.py" />
     <Compile Include="app\views\qelements.py" />
