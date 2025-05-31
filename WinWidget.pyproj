@@ -24,6 +24,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app\config.py" />
+    <Compile Include="app\tasks\pdf_merge.py" />
+    <Compile Include="app\tasks\image_pdf_convert.py" />
+    <Compile Include="app\tasks\__init__.py" />
+    <Compile Include="app\views\dialogs\files_dialog.py" />
     <Compile Include="app\views\dialogs\__init__.py" />
     <Compile Include="app\views\__init__.py" />
     <Compile Include="app\__init__.py" />
@@ -52,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
+    <Folder Include="app\tasks\" />
     <Folder Include="app\scripts\" />
     <Folder Include="app\services\" />
     <Folder Include="app\views\" />

@@ -6,6 +6,7 @@ from app.views.buttons.text_buttons import LayoutSwitchButton, TelegramButton, A
 from app.views.buttons.graphic_buttons import RectangleButton, ArrowButton, CleanButton
 from app.views.buttons.start_buttons import NotepadButton, CmdButton, CmdAdminButton, ZapretButton
 from app.views.buttons.time_buttons import TimerQuick10Button, TimerQuick30Button, TimerQuick60Button, TimerDialogButton, TimersListButton
+from app.views.buttons.tool_buttons import PdfConvertButton, MergePdfButton
 from app.views.qelements import QVSeparator
 
 class ButtonsGroup(QGroupBox):
@@ -18,7 +19,8 @@ class ButtonsGroup(QGroupBox):
         items = [
             [LayoutSwitchButton(), TelegramButton(), AITextConvertButton(), QVSeparator(), NotepadButton(), CmdAdminButton(), ZapretButton()],
             [RectangleButton(), ArrowButton(), CleanButton()],
-            [TimerQuick10Button(), TimerQuick30Button(), TimerQuick60Button(), TimerDialogButton(), TimersListButton()]
+            [TimerQuick10Button(), TimerQuick30Button(), TimerQuick60Button(), TimerDialogButton(), TimersListButton()],
+            [PdfConvertButton(), MergePdfButton()],
         ]
 
         for row_it, row in enumerate(items):

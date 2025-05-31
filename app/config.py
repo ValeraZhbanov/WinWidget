@@ -35,6 +35,8 @@ class Configs(BaseSettings):
     STYLES_PATH: str = os.path.join(RESOURCES_DIR, 'styles.qss')
 
     ZAPRET_SERVICE_BAT: str = 'C:\Program Files\zapret\service.bat'
+    LAST_USED_FOLDER_OPEN: str = os.path.expanduser("~")
+    LAST_USED_FOLDER_SAVE: str = os.path.expanduser("~")
 
     class Config:
         case_sensitive: bool = True
