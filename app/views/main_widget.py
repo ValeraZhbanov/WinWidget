@@ -2,9 +2,9 @@
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QGraphicsDropShadowEffect
 from PyQt6.QtCore import Qt, QPropertyAnimation, QRect
 from app.views.datetime_widget import QDateTimeWidget
-from app.views.buttons import ButtonsGroup
-from app.views.qelements import QHSeparator, QHoveredWidget
-from app.config import configs
+from app.views.buttons_group import ButtonsGroup
+from app.util.qelements import QHSeparator, QHoveredWidget
+from app.core.config import configs
 
 
 class QMainWidget(QHoveredWidget):

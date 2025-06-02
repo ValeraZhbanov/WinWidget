@@ -3,7 +3,7 @@ import json
 from typing import Optional, Dict, Any
 from PyQt6.QtCore import QObject, pyqtSignal, QUrl, QTimer
 from PyQt6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkReply
-from app.config import configs
+from app.core.config import configs
 
 class TelegramSendMessageNotebookBot(QObject):
 

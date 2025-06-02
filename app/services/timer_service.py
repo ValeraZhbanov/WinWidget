@@ -2,7 +2,7 @@
 import winsound
 from datetime import datetime, timedelta
 from PyQt6.QtCore import QObject, QTimer, pyqtSignal
-from app.config import configs
+from app.core.config import configs
 
 
 class TimerItem(QObject):

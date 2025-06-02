@@ -2,8 +2,8 @@
 from PyQt6.QtCore import Qt, QObject, QRect, pyqtSignal, QEvent, QTimer, QPropertyAnimation, QPoint, QLocale, QDateTime, pyqtProperty
 from PyQt6.QtGui import QCursor, QColor, QPalette
 from PyQt6.QtWidgets import QApplication, QFrame, QVBoxLayout, QLabel, QSizePolicy
-from app.views.qelements import QHoveredWidget
-from app.config import configs
+from app.util.qelements import QHoveredWidget
+from app.core.config import configs
 
 
 class ToastMessage(QFrame):

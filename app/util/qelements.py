@@ -1,8 +1,7 @@
-﻿import os
+﻿
 from PyQt6.QtGui import QIcon, QImage, QPixmap, QColor
 from PyQt6.QtCore import pyqtSignal, Qt, QEvent, pyqtProperty
 from PyQt6.QtWidgets import QDialog, QFrame, QPushButton
-from app.config import configs
 
 
 class QHSeparator(QFrame):
@@ -19,6 +18,12 @@ class QVSeparator(QFrame):
         self.setFrameShape(QFrame.Shape.VLine)
         self.setFrameShadow(QFrame.Shadow.Sunken)
         self.setFixedWidth(1)
+
+
+class QEmpty(QFrame):
+    def __init__(self):
+        super().__init__()
+        self.setFrameShadow(QFrame.Shadow.Sunken)
 
 
 class QIconButton(QPushButton):
@@ -47,7 +52,7 @@ class QIconButton(QPushButton):
         self.update_icon()
 
     def setIconFile(self, icon_file):
-        self.image = QImage(os.path.join(configs.RESOURCES_DIR, icon_file))
+        self.image = QImage(icon_file)
         self.image.convertTo(QImage.Format.Format_ARGB32)
         self.setImage(self.image)
 
@@ -69,8 +74,6 @@ class QIconButton(QPushButton):
                 image.setPixelColor(x, y, pixel_color)
                 
         self.setImage(image)
-
-
 
 
 class QDialogParentHide(QDialog):

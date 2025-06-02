@@ -1,3 +1,3 @@
 ﻿
 from app.win_widget import WinWidget
-from app.config import configs
+from app.core.config import configs, Configs

@@ -1,7 +1,7 @@
 ﻿import logging
 from PyQt6.QtWidgets import QWidget, QFrame, QDialog, QLabel, QTextEdit, QDialogButtonBox, QVBoxLayout, QMessageBox
 from PyQt6.QtCore import Qt, QEvent, pyqtSignal, QTimer
-from app.views.qelements import QDialogParentHide
+from app.util.qelements import QDialogParentHide
 
 
 class QLinesInputDialog(QDialogParentHide):

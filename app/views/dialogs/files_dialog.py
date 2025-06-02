@@ -1,6 +1,6 @@
 ﻿import os
 from PyQt6.QtWidgets import QFileDialog
-from app.config import configs
+from app.core.config import configs
 
 class FileDialog(QFileDialog):
     @staticmethod
@@ -16,6 +16,8 @@ class FileDialog(QFileDialog):
             files = dialog.selectedFiles()
             if files:
                 configs.LAST_USED_FOLDER_OPEN = os.path.dirname(files[0])
+                if configs.LAST_USED_FOLDER_SAVE == os.path.expanduser("~"):
+                    configs.LAST_USED_FOLDER_SAVE = configs.LAST_USED_FOLDER_OPEN
             return files
         return []
 
@@ -32,5 +34,7 @@ class FileDialog(QFileDialog):
             file = dialog.selectedFiles()[0]
             if file:
                 configs.LAST_USED_FOLDER_SAVE = os.path.dirname(file)
+                if configs.LAST_USED_FOLDER_OPEN == os.path.expanduser("~"):
+                    configs.LAST_USED_FOLDER_OPEN = configs.LAST_USED_FOLDER_SAVE
             return file
         return None

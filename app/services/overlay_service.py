@@ -3,8 +3,8 @@ from PyQt6.QtCore import Qt, QObject, QRect, pyqtSignal, QEvent, QTimer
 from PyQt6.QtGui import QCursor
 from PyQt6.QtWidgets import QApplication, QLineEdit, QTextEdit, QComboBox, QSpinBox, QDateTimeEdit
 from app.views.main_widget import QMainWidget
-from app.views.qelements import QHoveredWidget
-from app.config import configs
+from app.util.qelements import QHoveredWidget
+from app.core.config import configs
 
 
 class QOverlayWidget(QHoveredWidget):

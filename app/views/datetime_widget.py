@@ -2,7 +2,7 @@
 import logging
 from PyQt6.QtWidgets import QFrame, QLabel, QGridLayout
 from PyQt6.QtCore import Qt, QTimer, QDateTime, QLocale
-from app.config import configs
+from app.core.config import configs
 
 class QDateTimeWidget(QFrame):
     def __init__(self):

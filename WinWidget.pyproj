@@ -13,6 +13,8 @@
     <RootNamespace>WinWidget</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <InterpreterId>Global|PythonCore|3.11</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,10 +25,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\config.py" />
+    <Compile Include="app\actions\__init__.py" />
+    <Compile Include="app\core\base_action.py" />
+    <Compile Include="app\core\config.py" />
+    <Compile Include="app\core\__init__.py" />
     <Compile Include="app\tasks\pdf_merge.py" />
     <Compile Include="app\tasks\image_pdf_convert.py" />
     <Compile Include="app\tasks\__init__.py" />
+    <Compile Include="app\util\__init__.py" />
     <Compile Include="app\views\dialogs\files_dialog.py" />
     <Compile Include="app\views\dialogs\__init__.py" />
     <Compile Include="app\views\__init__.py" />
@@ -39,16 +45,15 @@
     <Compile Include="app\services\integration_service.py" />
     <Compile Include="app\services\overlay_service.py" />
     <Compile Include="app\services\__init__.py" />
-    <Compile Include="app\views\qelements.py" />
+    <Compile Include="app\util\qelements.py" />
     <Compile Include="app\views\dialogs\lines_dialog.py" />
     <Compile Include="app\views\dialogs\timer_dialogs.py" />
-    <Compile Include="resources\styles.qss" />
-    <Compile Include="app\views\buttons\graphic_buttons.py" />
-    <Compile Include="app\views\buttons\tool_buttons.py" />
-    <Compile Include="app\views\buttons\time_buttons.py" />
-    <Compile Include="app\views\buttons\start_buttons.py" />
-    <Compile Include="app\views\buttons\text_buttons.py" />
-    <Compile Include="app\views\buttons\__init__.py" />
+    <Compile Include="app\actions\graphic_actions.py" />
+    <Compile Include="app\actions\pdf_actions.py" />
+    <Compile Include="app\actions\time_actions.py" />
+    <Compile Include="app\actions\start_actions.py" />
+    <Compile Include="app\actions\text_actions.py" />
+    <Compile Include="app\views\buttons_group.py" />
     <Compile Include="app\views\datetime_widget.py" />
     <Compile Include="app\views\main_widget.py" />
     <Compile Include="app\win_widget.py" />
@@ -56,13 +61,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
+    <Folder Include="app\actions\" />
+    <Folder Include="app\core\" />
+    <Folder Include="app\util\" />
     <Folder Include="app\tasks\" />
     <Folder Include="app\scripts\" />
     <Folder Include="app\services\" />
     <Folder Include="app\views\" />
-    <Folder Include="app\views\buttons\" />
     <Folder Include="app\views\dialogs\" />
     <Folder Include="resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.11" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

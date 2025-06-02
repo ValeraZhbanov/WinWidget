@@ -8,7 +8,7 @@ from app.services.overlay_service import OverlayService
 from app.services.integration_service import IntegrationService
 from app.services.timer_service import TimerService
 from app.services.toast_service import ToastService
-from app.config import configs
+from app.core.config import configs
 
 
 class WinWidget(QApplication):

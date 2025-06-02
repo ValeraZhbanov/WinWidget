@@ -1,19 +1,21 @@
 ﻿import os
-from PIL import Image
-from fpdf import FPDF
+from app.core.base_action import BaseAction
 from app.services.toast_service import ToastService
 from app.tasks.image_pdf_convert import PdfConverterThread
 from app.tasks.pdf_merge import PdfMergerThread
 from app.views.dialogs.files_dialog import FileDialog
-from app.views.qelements import QIconButton
 
-class PdfConvertButton(QIconButton):
-    def __init__(self):
-        super().__init__("icons8-pdf-50.png", "Конвертировать изображения в PDF")
-        
-    def on_click(self):
+class JPG2PDFConvertAction(BaseAction):
+    group: str = 'PDF'
+    order: int = 1
+
+    icon_path: str | None = 'icons8-pdf-50.png'
+    title: str | None = 'Конвертировать изображения в PDF'
+    description: str | None = 'Конвертировать изображения в PDF'
+
+    def perform(self):
         try:
-            image_paths = FileDialog.getOpenFileNamesEx(self.window(), None, "Images (*.png *.jpg *.jpeg *.bmp)")
+            image_paths = FileDialog.getOpenFileNamesEx(self.parent().window(), None, "Images (*.png *.jpg *.jpeg *.bmp)")
 
             if not image_paths:
                 ToastService().add("Не выбрано ни одного изображения")
@@ -30,7 +32,7 @@ class PdfConvertButton(QIconButton):
 
     def on_pdf_ready(self, pdf_object):
         try:
-            pdf_path = FileDialog.getSaveFileNameEx(self.window(), "Сохранить PDF как", "PDF Files (*.pdf)")
+            pdf_path = FileDialog.getSaveFileNameEx(self.parent().window(), "Сохранить PDF как", "PDF Files (*.pdf)")
             
             if not pdf_path:
                 return
@@ -46,13 +48,17 @@ class PdfConvertButton(QIconButton):
             ToastService().add(f"Ошибка при сохранении PDF: {str(e)}")
 
 
-class MergePdfButton(QIconButton):
-    def __init__(self):
-        super().__init__("icons8-merge-50.png", "Объединить PDF файлы")
-        
-    def on_click(self):
+class MergePdfAction(BaseAction):
+    group: str = 'PDF'
+    order: int = 2
+
+    icon_path: str | None = 'icons8-merge-50.png'
+    title: str | None = 'Объединить PDF файлы'
+    description: str | None = 'Объединить PDF файлы'
+
+    def perform(self):
         try:
-            pdf_paths = FileDialog.getOpenFileNamesEx(self.window(), None, "PDF Files (*.pdf)")
+            pdf_paths = FileDialog.getOpenFileNamesEx(self.parent().window(), None, "PDF Files (*.pdf)")
                 
             if len(pdf_paths) < 2:
                 ToastService().add("Выберите хотя бы 2 PDF файла для объединения")
@@ -69,7 +75,7 @@ class MergePdfButton(QIconButton):
 
     def on_pdf_ready(self, pdf_object):
         try:
-            pdf_path = FileDialog.getSaveFileNameEx(self.window(), "Сохранить PDF как", "PDF Files (*.pdf)")
+            pdf_path = FileDialog.getSaveFileNameEx(self.parent().window(), "Сохранить PDF как", "PDF Files (*.pdf)")
             
             if not pdf_path:
                 return

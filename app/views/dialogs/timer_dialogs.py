@@ -2,10 +2,10 @@
 from datetime import timedelta
 from PyQt6.QtWidgets import QWidget, QTabWidget, QVBoxLayout, QGridLayout, QPushButton, QDateTimeEdit, QTimeEdit, QPlainTextEdit, QListWidget, QAbstractItemView, QDialogButtonBox
 from PyQt6.QtCore import Qt, pyqtSignal, QDateTime
-from app.views.qelements import QDialogParentHide
+from app.util.qelements import QDialogParentHide
 from app.services.timer_service import TimerService
 from app.services.toast_service import ToastService
-from app.config import configs
+from app.core.config import configs
 
 
 class TimerDialog(QDialogParentHide):
