@@ -23,7 +23,7 @@ class Configs(BaseSettings):
 
     WIDGET_RECT: tuple = (3, 200, 500, 300)
     TARGET_RECT: tuple = (0, WIDGET_RECT[1], WIDGET_RECT[0], WIDGET_RECT[3])
-    TOAST_RECT: tuple = (WIDGET_RECT[0], WIDGET_RECT[1] + WIDGET_RECT[3], WIDGET_RECT[2], 1000)
+    TOAST_RECT: tuple = (WIDGET_RECT[0], WIDGET_RECT[1] + WIDGET_RECT[3], WIDGET_RECT[2], 100)
 
     MOUSE_INTERVAL_UPDATE: int = 500
     DRAW_INTERVAL_UPDATE: int = 100
@@ -38,10 +38,14 @@ class Configs(BaseSettings):
     LAST_USED_FOLDER_OPEN: str = os.path.expanduser("~")
     LAST_USED_FOLDER_SAVE: str = os.path.expanduser("~")
 
-    GROUP_TEMPLATE: list = [
-        ['TEXT', None, 'DRAW', None, 'TIME'],    
-        ['START', None, 'PDF'],
-    ]
+    ACTION_GROUPS: dict = {
+        'DRAW': 'Рисование на экране',
+        'PDF': 'Обработка pdf-документов',
+        'START': 'Запуск программ',
+        'TEXT': 'Текст',
+        'TIME': 'Таймеры',
+    }
+    ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'PDF']
 
     class Config:
         case_sensitive: bool = True

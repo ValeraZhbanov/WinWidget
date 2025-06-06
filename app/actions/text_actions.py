@@ -54,7 +54,7 @@ class LayoutSwitchAction(BaseAction):
 
 class TelegramAction(BaseAction):
     group: str = 'TEXT'
-    order: int = 2
+    order: int = 3
 
     icon_path: str | None = 'icons8-telegram-50.png'
     title: str | None = 'Telegram Заметки'
@@ -81,7 +81,7 @@ class TelegramAction(BaseAction):
 
 class AITextConvertAction(BaseAction):
     group: str = 'TEXT'
-    order: int = 3
+    order: int = 2
 
     icon_path: str | None = 'icons8-text-color-48.png'
     title: str | None = 'Очистить AI текс'

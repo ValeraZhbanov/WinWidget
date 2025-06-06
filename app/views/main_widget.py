@@ -2,7 +2,7 @@
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout, QGraphicsDropShadowEffect
 from PyQt6.QtCore import Qt, QPropertyAnimation, QRect
 from app.views.datetime_widget import QDateTimeWidget
-from app.views.buttons_group import ButtonsGroup
+from app.views.action_frame import ActionFrame
 from app.util.qelements import QHSeparator, QHoveredWidget
 from app.core.config import configs
 
@@ -47,7 +47,7 @@ class QMainWidget(QHoveredWidget):
         self.separator = QHSeparator()
         self.main_layout.addWidget(self.separator)
         
-        self.buttons_group = ButtonsGroup()
+        self.buttons_group = ActionFrame()
         self.main_layout.addWidget(self.buttons_group)
 
         self.setLayout(self.main_layout)

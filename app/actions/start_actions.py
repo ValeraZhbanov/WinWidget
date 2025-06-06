@@ -34,7 +34,7 @@ class CmdRunAction(BaseAction):
     group: str = 'START'
     order: int = 2
 
-    icon_path: str | None = 'icons8-pdf-50.png'
+    icon_path: str | None = 'icons8-cmd-50.png'
     title: str | None = 'Консоль'
     description: str | None = 'Запустить консоль'
 

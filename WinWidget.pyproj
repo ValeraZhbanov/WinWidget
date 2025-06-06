@@ -53,7 +53,7 @@
     <Compile Include="app\actions\time_actions.py" />
     <Compile Include="app\actions\start_actions.py" />
     <Compile Include="app\actions\text_actions.py" />
-    <Compile Include="app\views\buttons_group.py" />
+    <Compile Include="app\views\action_frame.py" />
     <Compile Include="app\views\datetime_widget.py" />
     <Compile Include="app\views\main_widget.py" />
     <Compile Include="app\win_widget.py" />

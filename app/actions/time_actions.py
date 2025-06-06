@@ -33,7 +33,7 @@ class TimerQuick30Action(BaseAction):
         
 class TimerQuick60Action(BaseAction):
     group: str = 'TIME'
-    order: int = 2
+    order: int = 3
 
     icon_path: str | None = 'icons8-60-50.png'
     title: str | None = '60 минут'
@@ -46,7 +46,7 @@ class TimerQuick60Action(BaseAction):
         
 class TimerDialogAction(BaseAction):
     group: str = 'TIME'
-    order: int = 2
+    order: int = 4
 
     icon_path: str | None = 'icons8-timer-50.png'
     title: str | None = 'Добавить тайме'
@@ -59,7 +59,7 @@ class TimerDialogAction(BaseAction):
         
 class TimersListAction(BaseAction):
     group: str = 'TIME'
-    order: int = 2
+    order: int = 5
 
     icon_path: str | None = 'icons8-bulleted-list-100.png'
     title: str | None = 'Список таймеров'

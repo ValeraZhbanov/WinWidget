@@ -1,16 +1,16 @@
-﻿
+﻿import inspect
+from importlib import import_module
+from pathlib import Path
+from app.core.base_action import BaseAction
 
-
-from app.actions.graphic_actions import RectangleDrawAction, ArrowDrawAction, CleanDrawedAction
-from app.actions.pdf_actions import JPG2PDFConvertAction, MergePdfAction
-from app.actions.start_actions import NotepadRunAction, CmdAdminRunAction, ZapretButton
-from app.actions.text_actions import LayoutSwitchAction, TelegramAction, AITextConvertAction
-from app.actions.time_actions import TimerQuick10Action, TimerQuick30Action, TimerQuick60Action, TimerDialogAction, TimersListAction
 
 actions = [
-    RectangleDrawAction, ArrowDrawAction, CleanDrawedAction, 
-    JPG2PDFConvertAction, MergePdfAction,
-    NotepadRunAction, CmdAdminRunAction, ZapretButton,
-    LayoutSwitchAction, TelegramAction, AITextConvertAction,
-    TimerQuick10Action, TimerQuick30Action, TimerQuick60Action, TimerDialogAction, TimersListAction,
+    obj
+    for module_name in [
+        f.stem 
+        for f in Path(__file__).parent.glob("*.py") 
+        if f.is_file() and f.stem != "__init__"
+    ]
+    for _, obj in inspect.getmembers(import_module(f".{module_name}", package=__package__), inspect.isclass)
+    if issubclass(obj, BaseAction) and obj is not BaseAction
 ]

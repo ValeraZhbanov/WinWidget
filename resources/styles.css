@@ -56,20 +56,26 @@ QMainWidget {
     padding: 0;
 }
 
-    QMainWidget ButtonsGroup {
+    QMainWidget ActionFrame {
         border: none;
         margin: 0;
         padding: 0;
     }
 
-        QMainWidget ButtonsGroup QPushButton, QMainWidget ButtonsGroup QEmpty {
-            min-width: 25px;
-            max-width: 25px;
-            min-height: 25px;
-            max-height: 25px;
-            padding: 0;
+        QMainWidget ActionFrame ActionGroup {
+            border: none;
             margin: 0;
+            padding: 0;
         }
+
+            QMainWidget ActionFrame ActionGroup QPushButton {
+                min-width: 25px;
+                max-width: 25px;
+                min-height: 25px;
+                max-height: 25px;
+                padding: 0;
+                margin: 0;
+            }
 
     QMainWidget QDateTimeWidget {
         border: none;
