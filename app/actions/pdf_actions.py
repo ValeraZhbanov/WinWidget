@@ -41,6 +41,7 @@ class JPG2PDFConvertAction(BaseAction):
                 pdf_path += '.pdf'
             
             pdf_object.output(pdf_path)
+            del pdf_object
             ToastService().add(f"PDF успешно создан: {os.path.basename(pdf_path)}")
             os.startfile(pdf_path)
             
@@ -84,6 +85,7 @@ class MergePdfAction(BaseAction):
                 pdf_path += '.pdf'
             
             pdf_object.write(pdf_path)
+            pdf_object.close()
             ToastService().add(f"PDF успешно создан: {os.path.basename(pdf_path)}")
             os.startfile(pdf_path)
             
