@@ -19,11 +19,7 @@ class WinWidget(QApplication):
         super().__init__(sys.argv)
         self.setStyle("Fusion")
 
-        self.drawing_service = DrawingService()
         self.overlay_service = OverlayService()
-        self.integration_service = IntegrationService()
-        self.timer_service = TimerService()
-        self.toast_service = ToastService()
 
     def event(self, event: QEvent):
         if event.type() in (QEvent.Type.ApplicationPaletteChange,):

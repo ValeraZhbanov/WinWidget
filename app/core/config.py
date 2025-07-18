@@ -44,8 +44,9 @@ class Configs(BaseSettings):
         'START': 'Запуск программ',
         'TEXT': 'Текст',
         'TIME': 'Таймеры',
+        'SQL': 'SQL',
     }
-    ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'PDF']
+    ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'SQL', 'PDF']
 
     class Config:
         case_sensitive: bool = True

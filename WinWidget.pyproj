@@ -25,10 +25,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app\actions\sql_actions .py" />
     <Compile Include="app\actions\__init__.py" />
     <Compile Include="app\core\base_action.py" />
     <Compile Include="app\core\config.py" />
     <Compile Include="app\core\__init__.py" />
+    <Compile Include="app\tasks\sql_format.py" />
     <Compile Include="app\tasks\pdf_merge.py" />
     <Compile Include="app\tasks\image_pdf_convert.py" />
     <Compile Include="app\tasks\__init__.py" />
