@@ -56,7 +56,7 @@ schtasks /delete /tn "%TASK_NAME%" /f
 
 pip install -U -r "%PYTHON_LIBS_PATH%"
 
-schtasks /create /tn "%TASK_NAME%" /tr "%PYTHONW_PATH% \"%SCRIPT_PATH%\"" /sc onlogon /it /ru %USERNAME% /rl highest
+schtasks /create /tn "%TASK_NAME%" /tr "\"%PYTHONW_PATH%\" \"%SCRIPT_PATH%\"" /sc onlogon /it /ru %USERNAME% /rl highest
 
 schtasks /run /tn "%TASK_NAME%"
 
