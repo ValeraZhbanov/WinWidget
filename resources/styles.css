@@ -49,6 +49,12 @@ QOverlayWidget {
     margin: 0;
 }
 
+QOverlayWidget#OllamaOverlayWidget {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 palette(dark), stop:1 palette(highlight));
+    border-radius: 5px 0 5px 0;
+}
+
+
 QMainWidget {
     background: palette(dark);
     border: 1px solid palette(mid);
@@ -140,3 +146,19 @@ QDialog {
             padding: 3px 10px;
             margin: 3px 0px;
         }
+
+
+QOllamaMainWidget {
+    background: palette(dark);
+    border: 1px solid palette(mid);
+    border-radius: 0;
+    padding: 0;
+}
+
+QOllamaMainWidget QPushButton {
+    min-width: 80px;
+    min-height: 25px;
+    font-size: 10pt;
+    padding: 3px 10px;
+    margin: 3px 0px;
+}

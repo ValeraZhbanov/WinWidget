@@ -2,6 +2,9 @@
 import os
 import logging
 from pydantic_settings import BaseSettings
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QScreen
+
 
 class Configs(BaseSettings):
 
@@ -47,6 +50,32 @@ class Configs(BaseSettings):
         'SQL': 'SQL',
     }
     ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'SQL', 'PDF']
+
+
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+
+    @property
+    def OLLAMA_WIDGET_RECT(self) -> tuple:
+        app = QApplication.instance()
+        screen: QScreen = app.primaryScreen()
+        size = screen.size()
+        w = size.width() * 0.80
+        h = size.height() - 3
+        l = size.width() / 2 - w / 2
+        t = 3
+        return [*map(int, (l, t, w, h))]
+
+    @property
+    def OLLAMA_TARGET_RECT(self) -> tuple:
+        app = QApplication.instance()
+        screen: QScreen = app.primaryScreen()
+        size = screen.size()
+        w = size.width() * 0.20
+        h = 3
+        l = size.width() / 2 - w / 2
+        t = 0
+        return [*map(int, (l, t, w, h))]
+
 
     class Config:
         case_sensitive: bool = True

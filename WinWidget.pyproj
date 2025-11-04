@@ -30,6 +30,7 @@
     <Compile Include="app\core\base_action.py" />
     <Compile Include="app\core\config.py" />
     <Compile Include="app\core\__init__.py" />
+    <Compile Include="app\services\ollama_service.py" />
     <Compile Include="app\tasks\sql_format.py" />
     <Compile Include="app\tasks\pdf_merge.py" />
     <Compile Include="app\tasks\image_pdf_convert.py" />
@@ -37,6 +38,7 @@
     <Compile Include="app\util\__init__.py" />
     <Compile Include="app\views\dialogs\files_dialog.py" />
     <Compile Include="app\views\dialogs\__init__.py" />
+    <Compile Include="app\views\ollama_main_widget.py" />
     <Compile Include="app\views\__init__.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="main.py" />
