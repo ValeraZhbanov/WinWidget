@@ -67,16 +67,20 @@ class TelegramAction(BaseAction):
             if dialog.exec() == QDialog.DialogCode.Accepted:
                 text = dialog.toPlainText()
                 if text:
-                    IntegrationService().run_task(TelegramSendMessageNotebookBot(text, self._on_sended))
+                    task = TelegramSendMessageNotebookBot(text)
+                    task.request_finished.connect(self._on_sended)
+                    task.request_error.connect(self._on_error)
+                    IntegrationService().run_task(task)
 
         except Exception as exc:
             logging.error(f"Ошибка преобразования текста: {exc}")
 
     def _on_sended(self, data):
-        if data:
-            ToastService().add("Сообщение отправлено Telegram")
-        else:
-            ToastService().add("Не удалось отправить сообщение Telegram")
+        ToastService().add("Сообщение отправлено Telegram")
+
+    def _on_error(self, data):
+        ToastService().add("Не удалось отправить сообщение Telegram")
+            
 
 
 class AITextConvertAction(BaseAction):
