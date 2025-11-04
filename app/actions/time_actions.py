@@ -2,7 +2,7 @@
 from app.core.base_action import BaseAction
 from app.services.timer_service import TimerService
 from app.services.toast_service import ToastService
-from app.views.dialogs.timer_dialogs import TimerDialog, TimersListDialog
+from app.views.dialogs.timer_dialogs import QTimerDialog, QTimersListDialog
 
         
 class TimerQuick10Action(BaseAction):
@@ -44,7 +44,7 @@ class TimerQuick60Action(BaseAction):
         ToastService().add(f'Таймер установлен на 60 минут')
 
         
-class TimerDialogAction(BaseAction):
+class QTimerDialogAction(BaseAction):
     group: str = 'TIME'
     order: int = 4
 
@@ -53,7 +53,7 @@ class TimerDialogAction(BaseAction):
     description: str | None = 'Добавить таймеm'
 
     def perform(self):
-        dialog = TimerDialog(self.parent().window())
+        dialog = QTimerDialog(self.parent().window())
         dialog.exec()
 
         
@@ -66,5 +66,5 @@ class TimersListAction(BaseAction):
     description: str | None = 'Список таймеров'
 
     def perform(self):
-        dialog = TimersListDialog(self.parent().window())
+        dialog = QTimersListDialog(self.parent().window())
         dialog.exec()

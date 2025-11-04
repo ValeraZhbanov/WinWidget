@@ -6,6 +6,11 @@ QSeparator {
 QPushButton {
     background: palette(mid);
     border-radius: 4px;
+    min-width: 80px;
+    min-height: 25px;
+    font-size: 10pt;
+    padding: 3px 10px;
+    margin: 3px 0px;
 }
 
 QIconButton {
@@ -20,26 +25,12 @@ QPushButton:pressed {
     background: palette(mid);
 }
 
-QToastWidget {
-    background: transparent;
-    border: none;
-    padding: 10px;
-    margin: 0;
+QToolTip {
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11pt;
+    opacity: 240;
 }
-
-    /* Цвета настраиваются в классе, нужно для работы анимации */
-    QToastWidget QToastMessage {
-        border-radius: 8px;
-        padding: 10px 15px;
-    }
-
-        QToastWidget QToastMessage #TimeLabel {
-            font-size: 10pt;
-        }
-
-        QToastWidget QToastMessage #MessageLabel {
-            font-size: 14pt;
-        }
 
 QOverlayWidget {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 palette(dark), stop:1 palette(highlight));
@@ -48,12 +39,6 @@ QOverlayWidget {
     padding: 0;
     margin: 0;
 }
-
-QOverlayWidget#OllamaOverlayWidget {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 palette(dark), stop:1 palette(highlight));
-    border-radius: 5px 0 5px 0;
-}
-
 
 QMainWidget {
     background: palette(dark);
@@ -74,7 +59,7 @@ QMainWidget {
             padding: 0;
         }
 
-            QMainWidget ActionFrame ActionGroup QPushButton {
+            QMainWidget ActionFrame ActionGroup QIconButton {
                 min-width: 25px;
                 max-width: 25px;
                 min-height: 25px;
@@ -97,49 +82,27 @@ QMainWidget {
             font-size: 20pt;
         }
 
-QToolTip {
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 11pt;
-    opacity: 240;
-}
 
-QDialog {
-}
-
-    QDialog QTabWidget {
+    QMainWidget QDialogParentHide {
     }
 
-    QDialog QTextEdit {
-        padding: 10px;
-        font-size: 12pt;
-    }
+        QMainWidget QDialogParentHide QTabWidget {
+        }
 
-    QDialog QTimeEdit, QDialog QDateTimeEdit {
-        font-size: 10pt;
-    }
-
-    QDialog QPushButton {
-        min-width: 80px;
-        min-height: 25px;
-        font-size: 10pt;
-        padding: 3px 10px;
-        margin: 3px 0px;
-    }
-
-        QDialog QPushButton#QuickTimerButton {
+        QMainWidget QDialogParentHide QTextEdit {
+            padding: 10px;
             font-size: 12pt;
         }
 
-    QDialog QListWidget {
-        min-width: 80px;
-        min-height: 25px;
-        font-size: 10pt;
-        padding: 3px 10px;
-        margin: 3px 0px;
-    }
+        QMainWidget QDialogParentHide QTimeEdit {
+            font-size: 10pt;
+        }
 
-        QDialog QListWidget QAbstractItemView {
+        QMainWidget QDialogParentHide QDateTimeEdit {
+            font-size: 10pt;
+        }
+
+        QMainWidget QDialogParentHide QListWidget {
             min-width: 80px;
             min-height: 25px;
             font-size: 10pt;
@@ -147,6 +110,40 @@ QDialog {
             margin: 3px 0px;
         }
 
+            QMainWidget QDialogParentHide QListWidget QAbstractItemView {
+                min-width: 80px;
+                min-height: 25px;
+                font-size: 10pt;
+                padding: 3px 10px;
+                margin: 3px 0px;
+            }
+
+QToastWidget {
+    background: transparent;
+    border: none;
+    padding: 10px;
+    margin: 0;
+}
+
+    /* Цвета настраиваются в классе, нужно для работы анимации */
+    QToastWidget QToastMessage {
+        border-radius: 8px;
+        padding: 10px 15px;
+    }
+
+        QToastWidget QToastMessage #TimeLabel {
+            font-size: 10pt;
+        }
+
+        QToastWidget QToastMessage #MessageLabel {
+            font-size: 14pt;
+        }
+
+
+QOverlayWidget#OllamaOverlayWidget {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 palette(dark), stop:1 palette(highlight));
+    border-radius: 5px 0 5px 0;
+}
 
 QOllamaMainWidget {
     background: palette(dark);
@@ -155,10 +152,119 @@ QOllamaMainWidget {
     padding: 0;
 }
 
-QOllamaMainWidget QPushButton {
-    min-width: 80px;
-    min-height: 25px;
-    font-size: 10pt;
-    padding: 3px 10px;
-    margin: 3px 0px;
+    QOllamaMainWidget QPushButton {
+        min-width: 80px;
+        min-height: 25px;
+        font-size: 10pt;
+        padding: 3px 10px;
+        margin: 3px 0px;
+    }
+
+#sidebar {
+    background-color: #252525;
+    border-right: 1px solid #444;
 }
+
+    #sidebar QPushButton {
+        text-align: left;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        background-color: transparent;
+    }
+
+        #sidebar QPushButton:hover {
+            background-color: #3a3a3a;
+        }
+
+#messagesArea {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+
+#messagesScrollArea {
+    background-color: #1e1e1e;
+    border: none;
+}
+
+MessageWidget {
+    border-radius: 8px;
+    margin: 5px;
+}
+
+LoadingMessageWidget {
+    border-radius: 8px;
+    margin: 5px;
+}
+
+QTextEdit {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 8px;
+    color: #ffffff;
+}
+
+    QTextEdit:focus {
+        border: 1px solid #4a90e2;
+    }
+
+QComboBox {
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #ffffff;
+}
+
+    QComboBox:hover {
+        border: 1px solid #4a90e2;
+    }
+
+QToolBar {
+    background-color: #252525;
+    border: none;
+    spacing: 10px;
+    padding: 5px;
+}
+
+QCheckBox {
+    color: #ffffff;
+}
+
+QListWidget {
+    background-color: #252525;
+    border: none;
+    color: #ffffff;
+}
+
+    QListWidget::item {
+        padding: 8px;
+        border-bottom: 1px solid #333;
+    }
+
+        QListWidget::item:selected {
+            background-color: #4a90e2;
+        }
+
+        QListWidget::item:hover {
+            background-color: #333333;
+        }
+
+QScrollBar:vertical {
+    background-color: #2d2d2d;
+    width: 15px;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #555555;
+    border-radius: 7px;
+    min-height: 20px;
+}
+
+    QScrollBar::handle:vertical:hover {
+        background-color: #666666;
+    }
+

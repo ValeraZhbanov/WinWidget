@@ -7,3 +7,4 @@ pillow
 fpdf2
 PyPDF2
 sqlparse
+ollama

@@ -8,11 +8,10 @@ from app.services.toast_service import ToastService
 from app.core.config import configs
 
 
-class TimerDialog(QDialogParentHide):
+class QTimerDialog(QDialogParentHide):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Добавить таймер")
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
         
         layout = QVBoxLayout()
         
@@ -112,13 +111,12 @@ class TimerDialog(QDialogParentHide):
             self.accept()
 
 
-class TimersListDialog(QDialogParentHide):
+class QTimersListDialog(QDialogParentHide):
     timer_removed = pyqtSignal(str)
     
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Активные таймеры")
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
         
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignTop)

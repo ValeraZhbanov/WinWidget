@@ -88,7 +88,6 @@ class OverlayService(QObject):
         else:
             if self.main.isVisible():
                 self.main.hide()
-                self.timer.stop()
                 logging.debug(f"Mouse outside area {pos}")
 
         if self.ollama_target_rect.contains(pos) or (self.ollama_main.isVisible() and self.ollama_widget_rect.contains(pos)):
@@ -99,6 +98,9 @@ class OverlayService(QObject):
             if self.ollama_main.isVisible():
                 self.ollama_main.hide()
                 logging.debug(f"Mouse outside Ollama area {pos}")
+
+        if not (self.main.isVisible() or self.ollama_main.isVisible()):
+            self.timer.stop()
 
     def app_has_focus(self):
         app = QApplication.instance()

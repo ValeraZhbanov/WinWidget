@@ -1,4 +1,5 @@
 ﻿
+import logging
 from PyQt6.QtGui import QIcon, QImage, QPixmap, QColor
 from PyQt6.QtCore import pyqtSignal, Qt, QEvent, pyqtProperty, QRect, QSize, QPoint
 from PyQt6.QtWidgets import QDialog, QFrame, QPushButton, QLayout
@@ -81,9 +82,11 @@ class QDialogParentHide(QDialog):
         super().__init__(parent)
         self.setWindowFlags(
             Qt.WindowType.FramelessWindowHint |
-            Qt.WindowType.Dialog
+            Qt.WindowType.Dialog |
+            Qt.WindowType.WindowStaysOnTopHint
         )
         self.setGeometry(parent.geometry())
+        logging.info(str(parent.geometry()))
         parent.installEventFilter(self)
 
     def eventFilter(self, obj, event):
