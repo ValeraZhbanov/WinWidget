@@ -60,5 +60,4 @@ schtasks /create /tn "%TASK_NAME%" /tr "\"%PYTHONW_PATH%\" \"%SCRIPT_PATH%\"" /s
 
 schtasks /run /tn "%TASK_NAME%"
 
-pause
 endlocal

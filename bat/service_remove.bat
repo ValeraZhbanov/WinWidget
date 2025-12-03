@@ -21,5 +21,4 @@ wmic process where "name like '%%%PROCESS_NAME%%%' and commandline like '%%%APP_
 
 schtasks /delete /tn "%TASK_NAME%" /f
 
-pause
 endlocal
