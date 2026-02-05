@@ -2,6 +2,7 @@
 import sys
 import ctypes
 import subprocess
+from PyQt6.QtGui import QGuiApplication
 from app.core.base_action import BaseAction
 from app.services.toast_service import ToastService
 from app.core.config import configs
@@ -18,7 +19,8 @@ class IPClientRunAction(BaseAction):
         try:
             ipclient_script = os.path.join(configs.SCRIPTS_DIR, 'ipclient.py')
             ctypes.windll.shell32.ShellExecuteW(None, 'runas', sys.executable, f'"{ipclient_script}" "{configs.PROJECT_ROOT}" on', None, 1)
-            ToastService().add(f"Дождитесь запуска и введите пин код: {configs.IPCLIENT_PIN or 'Не настроено'}")
+            QGuiApplication.clipboard().setText(configs.IPCLIENT_PIN)
+            ToastService().add(f"Дождитесь запуска, пин код уже в вашем буфере обмена")
         except Exception as e:
             ToastService().add(f"Ошибка запуска IP-Client: {e}")
 
