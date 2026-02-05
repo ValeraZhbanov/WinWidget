@@ -18,11 +18,12 @@ class NotepadRunAction(BaseAction):
 
     def perform(self):
         try:
-            subprocess.Popen(['notepad.exe'])
+            ctypes.windll.shell32.ShellExecuteW(None, None, 'notepad.exe', None, None, 1)
         except Exception as e:
             ToastService().add(f"Ошибка запуска блокнота: {e}")
 
-    def is_available():
+    @classmethod
+    def is_available(cls):
         try:
             subprocess.run(['where', 'notepad.exe'], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return True
@@ -45,7 +46,8 @@ class CmdRunAction(BaseAction):
         except Exception as e:
             ToastService().add(f"Ошибка запуска командной строки: {e}")
 
-    def is_available():
+    @classmethod
+    def is_available(cls):
         try:
             subprocess.run(['where', 'cmd.exe'], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             return True
@@ -83,7 +85,8 @@ class ZapretButton(BaseAction):
         except Exception as e:
             ToastService().add(f"Ошибка запуска zapret-service.bat от имени администратора: {e}")
 
-    def is_available():
+    @classmethod
+    def is_available(cls):
         if not configs.ZAPRET_SERVICE_BAT:
             return False
             

@@ -26,10 +26,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app\actions\sql_actions .py" />
+    <Compile Include="app\actions\ipclient_actions.py" />
     <Compile Include="app\actions\__init__.py" />
     <Compile Include="app\core\base_action.py" />
     <Compile Include="app\core\config.py" />
     <Compile Include="app\core\__init__.py" />
+    <Compile Include="app\scripts\ipclient.py" />
     <Compile Include="app\tasks\sql_format.py" />
     <Compile Include="app\tasks\pdf_merge.py" />
     <Compile Include="app\tasks\image_pdf_convert.py" />
@@ -65,6 +67,7 @@
     <Folder Include="app\" />
     <Folder Include="app\actions\" />
     <Folder Include="app\core\" />
+    <Folder Include="app\NewFolder1\" />
     <Folder Include="app\util\" />
     <Folder Include="app\tasks\" />
     <Folder Include="app\scripts\" />

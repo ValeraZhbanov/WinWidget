@@ -13,6 +13,7 @@ class Configs(BaseSettings):
     PROJECT_TITLE: str = ''
     PROJECT_ROOT: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     RESOURCES_DIR: str = os.path.join(PROJECT_ROOT, 'resources')
+    SCRIPTS_DIR: str = os.path.join(PROJECT_ROOT, 'app', 'scripts')
 
     DATETIME_FORMAT: str = 'dd.MM.yyyy HH:mm:ss'
     TIME_FORMAT: str = 'HH:mm:ss'
@@ -35,6 +36,9 @@ class Configs(BaseSettings):
     STYLES_PATH: str = os.path.join(RESOURCES_DIR, 'styles.css')
 
     ZAPRET_SERVICE_BAT: str = 'C:\Program Files\zapret\service.bat'
+    IPCLIENT_EXE: str = 'C:\Program Files\AMICON\Client FPSU-IP\ip-client.exe'
+    IPCLIENT_SERVICE_NAME: str = 'IP-Client'
+    IPCLIENT_PIN: str | None = os.getenv('IPCLIENT_PIN')
     LAST_USED_FOLDER_OPEN: str = os.path.expanduser("~")
     LAST_USED_FOLDER_SAVE: str = os.path.expanduser("~")
 
@@ -45,8 +49,9 @@ class Configs(BaseSettings):
         'TEXT': 'Текст',
         'TIME': 'Таймеры',
         'SQL': 'SQL',
+        'IPCLIENT': 'IP-Client',
     }
-    ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'SQL', 'PDF']
+    ACTION_FAST_ACCESS: list = ['TEXT', 'DRAW', 'START', 'TIME', 'SQL', 'PDF', 'IPCLIENT']
 
     class Config:
         case_sensitive: bool = True

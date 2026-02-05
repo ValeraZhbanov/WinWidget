@@ -16,7 +16,8 @@ class BaseAction(QObject):
 
         pass
 
-    def is_available():
+    @classmethod
+    def is_available(cls):
         return True
 
 
